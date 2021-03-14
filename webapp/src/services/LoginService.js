@@ -2,6 +2,7 @@ import { getDefaultSession, login } from "@inrupt/solid-client-authn-browser";
 import FileClient from "solid-file-client";
 import auth from "solid-auth-client";
 
+
 const Login = async (provider, webId) => {
     const session = getDefaultSession();
     const exist = await existWebId(webId);
@@ -10,6 +11,7 @@ const Login = async (provider, webId) => {
         alert("Valido " + webId);
         provider = getProvider(webId);
         await loginWithProvider(provider, session);
+
     }
     else if (size === parseInt(0)) {
         alert("WebId vacio " + webId);
@@ -36,8 +38,8 @@ function getProvider(webId) {
         const webIdParts = webId.split("/");
         const providerParts = webIdParts[2].split(".");
         const provider = "https://m." + providerParts[1] + "." + providerParts[2];
-        alert(provider)
-        return provider
+        alert(provider);
+        return provider;
     }
     return webId
 }

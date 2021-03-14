@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
+    "@inrupt/solid-client-authn-browser": "^1.7.1",
+    "@inrupt/solid-react-components": "^0.5.5",
+    "@inrupt/solid-ui-react": "^2.1.1",
+    "@ldflex/rdflib": "^1.0.0",
+    "@material-ui/icons": "^4.11.2",
+    "@solid/query-ldflex": "^2.11.3",
+=======
     "@inrupt/lit-generated-vocab-common": "^0.3.11",
     "@inrupt/solid-client": "^1.5.0",
     "@inrupt/solid-client-authn-browser": "^1.7.1",
@@ -11,11 +19,26 @@
     "@inrupt/vocab-common-rdf": "^0.7.2",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+>>>>>>> tmp
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
     "bootstrap": "^4.6.0",
     "express": "^4.17.1",
+<<<<<<< HEAD
+    "ldflex": "^2.12.0",
+    "react": "^16.8.6",
+    "react-bootstrap": "^1.5.1",
+    "react-document-title": "^2.0.3",
+    "react-dom": "16.8",
+    "react-is": "16.8",
+    "react-notifications": "^1.7.2",
+    "react-scripts": "4.0.1",
+    "react-toastify": "^7.0.3",
+    "react-update": "^0.4.4",
+    "solid-file-client": "^1.2.3",
+    "styled-components": "^5.0.0",
+=======
     "mapbox-gl": "^2.1.1",
     "properties-reader": "^2.2.0",
     "react": "^17.0.1",
@@ -29,6 +52,7 @@
     "slick-carousel": "^1.8.1",
     "solid-auth-client": "^2.5.5",
     "solid-file-client": "^1.2.3",
+>>>>>>> tmp
     "web-vitals": "^0.2.4"
   },
   "scripts": {
