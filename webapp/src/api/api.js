@@ -88,6 +88,20 @@ export async function getUsernameByWebId(webId) {
     return await response.json()
 }
 
+//Obtener nombre de usuario con webid COMPROBAR
+export async function getUsernameByWebId(webId) {
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint + '/usuario/webId', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(
+            {
+                'webId': webId
+            })
+    })
+    return await response.json()
+}
+
 
 
 //Añadir elemento a la tabla de peticiones COMPROBAR

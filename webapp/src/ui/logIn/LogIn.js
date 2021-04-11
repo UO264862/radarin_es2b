@@ -1,25 +1,23 @@
-// External dependences
+import './LogIn.css';
 import React from 'react';
-import { Grid } from '@material-ui/core'
+import {Grid } from '@material-ui/core'
+import Provider from './Provider';
+import WebId from './WebId';
+import { LoginButton, RegisterButton } from "./LoginButtons"
 
-// Dependences from: ~/ui/logIn
-import Provider from './modules/Provider';
-import WebId from './modules/WebId';
-import { LoginButton, RegisterButton } from "./modules/LoginButtons"
-import './logIn.css';
 
 function LogIn(props) {
     return (
-        <section style={{ display: "inline-block" }}>
-            <div className="container-provider-webid">
-                <Provider />
-                <div className="divisor">
-                    {/*<span className="divisor-line"></span>*/}
-                    <span className="divisor-text"> -OR- </span>
-                    {/*<span className="divisor-line"></span>*/}
+        <section style={{display:"inline-block"}}>
+                <div className="container-provider-webid">
+                    <Provider />
+                    <div className="divisor">
+                        {/*<span className="divisor-line"></span>*/}
+                        <span className="divisor-text"> -OR- </span>
+                        {/*<span className="divisor-line"></span>*/}
+                    </div>
+                    <WebId />
                 </div>
-                <WebId />
-            </div>
             <Grid className="container-buttons" container direction="column">
                 <RegisterButton />
                 <LoginButton />
@@ -28,5 +26,4 @@ function LogIn(props) {
         </section>
     );
 }
-
 export default LogIn;

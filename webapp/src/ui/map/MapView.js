@@ -8,6 +8,11 @@ import { getDefaultSession } from "@inrupt/solid-client-authn-browser";
 import './map.css';
 import { getMarkers } from './modules/Markers';
 
+
+// Import dependences
+import { getDefaultSession } from '@inrupt/solid-client-authn-browser';
+import { addUsuario, getNumeroUsuarios } from '../../api/api';
+
 // Dependences from: ~/util
 import { useInterval } from '../../util/hooks/UseInterval';
 import { getMapBoxAccessToken, getAttributionMessage } from '../../util/CommonDataConfiguration';

@@ -1,28 +1,26 @@
-// External dependences
-import { getDefaultSession, login } from "@inrupt/solid-client-authn-browser";
 import FileClient from "solid-file-client";
-import auth from "solid-auth-client";
-
-const Login = async (provider, webId) => {
-    const session = getDefaultSession();
+import auth, { handleIncomingRedirect, logout, login, register, getDefaultSession } from "@inrupt/solid-client-authn-browser";
+//permite logearse ya sea por proveedor como por webId
+async function Login(provider, webId) {
+    await handleIncomingRedirect();
     const exist = await existWebId(webId);
     const size = String(webId).length;
     if (exist && size > 0) {
         //alert("Valido " + webId);
         provider = getProvider(webId);
         //await auth.login(provider);
-        await loginWithProvider(provider, session);
+        await LoginWithProvider(provider);
     }
     else if (size === parseInt(0)) {
         //alert("WebId vacio " + webId);
         //await auth.login(provider);
-        await loginWithProvider(provider, session);
+        await LoginWithProvider(provider);
     }
     else {
-        //alert("Invalido " + webId);
+        alert("WebID invalido: " + webId);
     }
 }
-
+//comprueba que existe ese webId en los diferentes pods
 async function existWebId(webId) {
     try {
         const fc = new FileClient(auth);
@@ -33,7 +31,7 @@ async function existWebId(webId) {
         return false;
     }
 }
-
+//obtiene el proveedor a partir de un webId
 function getProvider(webId) {
     if (webId.includes("profile")) {
         const webIdParts = webId.split("/");
@@ -44,20 +42,29 @@ function getProvider(webId) {
     }
     return webId
 }
+//te logea pro proveedor
+async function LoginWithProvider(provider) {
 
-async function loginWithProvider(provider) {
-    return await login({
-        oidcIssuer: provider,
-        redirectUrl: window.location.href
-    });
+    var not = new Notification("Bienvenido!!"); //mostramos un mensaje de bienvenida 
+    setTimeout(not.close, 3000);
+
+    if (!getDefaultSession().info.isLoggedIn) {
+        await login({
+            oidcIssuer: provider,
+            redirectUrl: window.location.href
+        });
+    }
+    else {
+        alert(`Logged in as ${getDefaultSession().info.webId}`)
+    }
+
 }
-
+//permite registrarte en el proveedor escogido
 const Register = async (provider) => {
 
 }
 
 const Logout = async () => {
-    await auth.logout().then().alert("logout")
+    logout({ returnTo: window.location.origin });
 }
-
 export { Login, Register, Logout }

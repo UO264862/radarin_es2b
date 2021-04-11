@@ -9,19 +9,19 @@ const FriendRequest = require("./models/FriendRequest")
 // Devuelve el número de usuarios
 router.get("/usuarios/count", async (req, res) => {
     const users = await Usuarios.find({}).sort('-_id') //Inverse order
-    res.send(users.length)
+    res.send(users.length);
 })
 
 //Añadir usuario COMPROBAR
 router.post("/usuario/add", async (req, res) => {
     let webid = req.body.webid;
-    let nombreUsuario = req.body.nombreUsuario;
     let usuario = await Usuarios.findOne({ webid: webid })
+    const users = await Usuarios.find({})
     if (usuario)
         res.send({ error: "Error: Este usuario ya ha sido añadido" })
     else {
-        usuario = new Usuario({
-            nombreUsuario: nombreUsuario,
+        usuario = new Usuarios({
+            nombreUsuario: users.length,
             webid: webid,
             coordinates: ""
         })
@@ -38,15 +38,15 @@ router.post("/usuario/modificar/nombre", async (req, res) => {
     if (usuario)
         res.send({ error: "Error: Este nombre de usuario ya existe" })
     else {
-        let usuario = Usuarios.findOneAndUpdate(
+        let usuario = await Usuarios.findOneAndUpdate(
             {
                 webid: webid
             },
             {
-                "$set": {
-                    nombreUsuario: nombreUsuario,
-                }
-            })
+
+                nombreUsuario: nombreUsuario,
+            },
+            { returnOriginal: false })
         if (usuario)
             res.send("El nombre ha sido cambiado con éxito")
         else
@@ -60,14 +60,12 @@ router.post("/usuario/modificar/coordinates", async (req, res) => {
     let coordinates = req.body.coordinates;
     let usuario = await Usuarios.findOne({ webid: webid })
     if (usuario) {
-        let usuario = Usuarios.findOneAndUpdate(
+        let usuario = await Usuarios.findOneAndUpdate(
             {
                 webid: webid
             },
             {
-                "$set": {
-                    coordinates: coordinates,
-                }
+                coordinates: coordinates
             })
         if (usuario)
             res.send("La localización ha sido cambiado con éxito")
@@ -78,7 +76,7 @@ router.post("/usuario/modificar/coordinates", async (req, res) => {
         res.send("Ha habido un error")
 })
 
-//Obtener nombre de usuario con webid COMPROBAR
+//Obtener webid con nombre de usuario COMPROBAR
 router.post("/usuario/nombreUsuario", async (req, res) => {
     let nombreUsuario = req.body.nombreUsuario;
     let usuario = await Usuarios.findOne({ nombreUsuario: nombreUsuario })
@@ -155,7 +153,7 @@ router.post("/friendrequest/aceptar", async (req, res) => {
             webidSolicitado: webidSolicitado
         })
     if (peticion) {
-        let peticion = FriendRequest.findOneAndUpdate(
+        let peticion = await FriendRequest.findOneAndUpdate(
             {
                 webidSolicitante: webidSolicitante,
                 webidSolicitado: webidSolicitado
@@ -190,5 +188,6 @@ router.post("/friendrequest/delete", async (req, res) => {
         res.send("Ha ocurrido un error")
     }
 })
+
 
 module.exports = router
