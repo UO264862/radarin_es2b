@@ -22,6 +22,7 @@ class CurrentUserService {
     }
 
     getDefaultUser() {
+        // Get coordinates from navigator
         let position = this.currentUserFactory.forGetCurrentUserCoords();
         if(position==null){
             position={lat:0,lng:0};
@@ -32,7 +33,7 @@ class CurrentUserService {
     async getFriends(webId) {
         var amigos = await new FriendsService(webId).obtenerAmigos();
         var lista = [];
-        for(const webidAmigo of amigos){
+        for (const webidAmigo of amigos) {
             var amigo = await getUsuarioByWebId(webidAmigo);
             var coordenadas = amigo.coordinates.split(",");
             lista.push(new UserDTO({ username: amigo.nombreUsuario, latitude: coordenadas[0], longitude: coordenadas[1] }))
@@ -40,7 +41,7 @@ class CurrentUserService {
         return lista;
     }
 
-    
+
 }
 
 export default CurrentUserService;
