@@ -36,7 +36,7 @@
   justify-content: center; 
 }
 
-.UserList{
+.UserList {
   padding-top:5vh;
 }
 
@@ -44,8 +44,8 @@
   from {
     transform: rotate(0deg);
   }
+  
   to {
     transform: rotate(360deg);
   }
 }
-

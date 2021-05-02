@@ -15,14 +15,6 @@ class CurrentUserService {
         let position = this.currentUserFactory.forGetCurrentUserCoords();
 
         if (position != null) {
-            // Update coordinates in the database
-            // let done = await this.currentUserFactory.forUpdateCurrentUserCoordinates(webId, position);
-
-            // if (!done)
-            //     console.log("Error al actualizar las coordenadas en la base de datos");
-
-            // let user = await this.currentUserFactory.forGetUsernameByWebId(webId);
-
             return new UserDTO({ username: username, latitude: position.lat, longitude: position.lng });
         } else {
             return this.getDefaultUser();
@@ -38,7 +30,6 @@ class CurrentUserService {
     }
 
     async getFriends(webId) {
-        //var amigos =  await this.obtenerAmigos();
         var amigos = await new FriendsService(webId).obtenerAmigos();
         var lista = [];
         for(const webidAmigo of amigos){
@@ -46,9 +37,6 @@ class CurrentUserService {
             var coordenadas = amigo.coordinates.split(",");
             lista.push(new UserDTO({ username: amigo.nombreUsuario, latitude: coordenadas[0], longitude: coordenadas[1] }))
         }
-        
-        // TO DO
-        // Se han establecido valores por defecto para la presentación del prototipo
         return lista;
     }
 

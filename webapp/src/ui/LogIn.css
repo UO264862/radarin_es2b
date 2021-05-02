@@ -1,30 +1,31 @@
 :root {
-    --primary: grey;
-    --secondary: white;
-  }
-
-.loginbackground{
-    background: url("../img/pexels-cottonbro-\ peque-5967048.jpg") ;
-    background-repeat: no-repeat;
-    height: 10000px;
-    width: 10000px;
-    background-color: white;
+  --primary: grey;
+  --secondary: white;
 }
 
-.container-buttons{
-    margin-top: 4vh;
-    align-content: center;
-    margin-bottom: 4vh;
+.loginbackground {
+  background: url("../img/pexels-cottonbro-5967048.jpg") ;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
 }
 
-.loginButton{
-    max-width: 800px;
-    border: 2px solid var(black);
-    background-Color: var(--primary);
-    color: var(--secondary);
-    border-radius: 20vw;
-    width: 80vw;
-    height: 20%;
-    font-size:min(80px,5vw);
+.container-buttons {
+  margin-top: 4vh;
+  align-content: center;
+  margin-bottom: 4vh;
 }
 
+.loginButton {
+  max-width: 800px;
+  border: 2px solid var(black);
+  background-Color: var(--primary);
+  color: var(--secondary);
+  border-radius: 20vw;
+  width: 80vw;
+  height: 20%;
+  font-size: min(80px,
+   5vw
+  );
+}

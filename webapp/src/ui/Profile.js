@@ -15,7 +15,6 @@ import {
 } from "@material-ui/core";
 
 import { modificarNombreUsuario, getUsernameByWebId } from "../api/api";
-import { getDefaultSession } from "@inrupt/solid-client-authn-browser";
 import EditIcon from "@material-ui/icons/Edit";
 import { FOAF, VCARD } from "@inrupt/lit-generated-vocab-common";
 import "./profile.css";
@@ -125,7 +124,7 @@ const Perfil = () => {
                 if (textEdit === "Confirmar") {
                   setText("Editar perfil");
                   modificarNombreUsuario(
-                    getDefaultSession().info.webId,
+                    webId,
                     document.getElementById("input").value
                   );
                   setBorder("0px solid");

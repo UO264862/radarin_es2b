@@ -6,7 +6,7 @@
 import auth from "solid-auth-client";
 import data from "@solid/query-ldflex";
 import FC from "solid-file-client";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import FileClient from "solid-file-client";
 import { addFriendRequest, getWebIdByUsername, eliminarSolicitud, aceptarSolicitud, getSolicitudesCompletadas, getSolicitudesPendientes, getUsernameByWebId } from "../../api/api";
 
@@ -15,14 +15,14 @@ import { addFriendRequest, getWebIdByUsername, eliminarSolicitud, aceptarSolicit
 class FriendsService {
   
   constructor(webId){
-    this.webid=webId
+    this.webid=webId;
   }
 
   //Enviar una peticion de amistad al usuario FUNICIONA
   async addFriendRequestService(friendUsername, userWebId) {
     //obtenemos la webId del usuario que hemos introducido
     await getWebIdByUsername(friendUsername).then(async (user) => {
-      var friendWebId = user.webid
+      var friendWebId = user.webid;
       if(friendWebId===undefined){
         throw new Error();
       }
@@ -32,7 +32,7 @@ class FriendsService {
         toast.warn("No te puedes añadir a ti mismo", {
           position: toast.POSITION.BOTTOM_LEFT,
           autoClose: 5000
-        })
+        });
         //si se ha encontrado un usuario con ese username
       } else{
         
@@ -41,20 +41,20 @@ class FriendsService {
           
           //creamos en una entrada en la tabla peticiones con los dos webId
           await addFriendRequest(userWebId, friendWebId).then(
-            ()=> toast.info("Tu peticion de amigo ha sido enviada", {
+            () => toast.info("Tu peticion de amigo ha sido enviada", {
             position: toast.POSITION.BOTTOM_LEFT,
             autoClose: 5000
-          })).catch(()=>toast.warn("Tu peticion no se ha podido enviar", {
+          })).catch(() =>toast.warn("Tu peticion no se ha podido enviar", {
             position: toast.POSITION.BOTTOM_LEFT,
             autoClose: 5000
-          }))
+          }));
         }
       }
     }).catch(
       () => toast.warn("Usuario invalido", {
         position: toast.POSITION.BOTTOM_LEFT,
         autoClose: 5000
-      }))
+      }));
 
   }
   // denegar la peticion de amistad
@@ -62,13 +62,13 @@ class FriendsService {
     //si no es amigo
     if (this.isAmigo(webIdSolicitado)) {
       //eliminar de base de datos la entrada a la tabla
-      eliminarSolicitud(webIdSolicitante, webIdSolicitado)
+      eliminarSolicitud(webIdSolicitante, webIdSolicitado);
       toast.info("La petición ha sido eliminada", {
         position: toast.POSITION.BOTTOM_LEFT,
         autoClose: 5000
       });
     }
-    this.reload()
+    this.reload();
   }
   // aceptar la peticion de amistad y añadir por parte de solicitado al solicitante
   async aceptFriendRequest(webIdSolicitante, webIdSolicitado) {
@@ -85,7 +85,7 @@ class FriendsService {
         });
       }
     }
-    this.reload()
+    this.reload();
   }
   // confirmar la peticion de amistad y añadir por parte del solicitante al solicitado
   async confirmFriendRequest(webIdSolicitante, webIdSolicitado) {
@@ -102,11 +102,11 @@ class FriendsService {
         });
       }
     }
-    this.reload()
+    this.reload();
   }
   //comprobamos si es o no amigo
   async isAmigo(webId) {
-    var amigos = await this.obtenerAmigos()
+    var amigos = await this.obtenerAmigos();
       for(const amigo of amigos){
         if(amigo===webId){
           toast.warn("El usuario ya es tu amigo", {
@@ -122,22 +122,20 @@ class FriendsService {
   async getPeticionesCompletadas(webId) {
     var peticiones = [];
     var lista=[]
-    peticiones = await getSolicitudesCompletadas(webId)
+    peticiones = await getSolicitudesCompletadas(webId);
     for(const peticion of peticiones){
-      lista.push(await getUsernameByWebId(peticion.webidSolicitado))
+      lista.push(await getUsernameByWebId(peticion.webidSolicitado));
     }
-    console.log("Lista:"+lista)
     return lista;
   }
   // listar peticiones pendientes
   async getPeticionesPendientes(webId) {
     var request = [];
     var lista=[]
-    request = await getSolicitudesPendientes(webId)
+    request = await getSolicitudesPendientes(webId);
     for(const peticion of request){
-      lista.push(await getUsernameByWebId(peticion.webidSolicitante))
+      lista.push(await getUsernameByWebId(peticion.webidSolicitante));
     }
-    console.log("Lista Completa:"+lista)
     return lista;
   }
 
@@ -282,14 +280,14 @@ class FriendsService {
     let session = await this.getSession();
     let webId = session.webId;
     return webId;
-  };
+  }
 
   async obtenerAmigos() {
     var lista = new Array();
-    if(await this.isWebIdValid(this.webId)){
-    for await (const friend of data[this.webid].friends) lista.push(friend.toString());
-    const users = await Promise.all(lista);
-    return users;
+    if(await this.isWebIdValid(this.webid)){
+      for await (const friend of data[this.webid].friends) lista.push(friend.toString());
+      const users = await Promise.all(lista);
+      return users;
     }
     return lista;
   }

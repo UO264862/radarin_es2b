@@ -2,6 +2,8 @@
 import 'leaflet/dist/leaflet.css';
 import {  useState } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 // Dependences from: ~/ui/map
 import './map.css';
@@ -62,7 +64,10 @@ function MapView(props) {
             }
         }
         if(amigosCerca && state.near===false){
-            new Notification("Tienes amigos cerca");
+            toast.info("Tienes amigos cerca", {
+                position: toast.POSITION.BOTTOM_LEFT,
+                autoClose: 5000
+              });
         }
         if (receivedUser != null){
             setState({ user: receivedUser, friends:amigos ,near:amigosCerca});
@@ -87,6 +92,7 @@ function MapView(props) {
                 zoomOffset={parseInt(-1)}
             />
             {usersMarkers}
+            <ToastContainer />
         </MapContainer >
     );
 }

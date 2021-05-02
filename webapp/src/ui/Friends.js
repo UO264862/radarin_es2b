@@ -58,7 +58,6 @@ export const Friends = () => {
 
 export async function listarPeticionesCompletadas(webId) {
   peticionesCompletadas = await new FriendsService(webId).getPeticionesCompletadas(webId);
-  console.log("Completadas:"+ await peticionesCompletadas)
     ReactDOM.render(
       <ListaPeticionesCompletadas />,
       document.getElementById("completadas")
@@ -101,9 +100,7 @@ export const PeticionCompletada = ({ peticion, confirmar }) => {
 }
 
 export async function listarPeticionesPendientes(webId) {
-  console.log(webId)
   peticionesPendientes = await new FriendsService(webId).getPeticionesPendientes(webId);
-  console.log("Pendientes:"+ await peticionesPendientes)
     ReactDOM.render(
       <ListaPeticionesPendientes />,
       document.getElementById("pendientes")
