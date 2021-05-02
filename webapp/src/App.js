@@ -1,9 +1,8 @@
 // External dependences
-import React, { useState } from 'react';
-import { SessionProvider } from "@inrupt/solid-ui-react";
+import React from 'react';
 import { Switch, Route, BrowserRouter } from "react-router-dom";
-import { useSession } from "@inrupt/solid-ui-react/dist";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { LoggedOut, LoggedIn } from "@solid/react";
 
 // Dependences from: ~/ui
 import './App.css';
@@ -12,45 +11,50 @@ import Friends from './ui/friends/Friends';
 import LogIn from './ui/logIn/LogIn';
 import MapView from './ui/map/MapView';
 import MNavBar from './ui/navBar/MNavBar';
-import PlaceholderPage from './ui/placeholderPage/PlaceholderPage';
 import Profile from './ui/profile/Profile';
+import PaginaBloqueada from './ui/admin/PaginaBloqueada';
+import Admin from './ui/admin/Admin';
+import RAdmin from './ui/admin/RAdmin';
+
 function App(props) {
 
-  //pide permisos de notificaciones al usuario
-  Notification.requestPermission();
-  
-  //We use this state variable
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+ //pide permisos de notificaciones al usuario
+ Notification.requestPermission();
 
-  //With this we can control the login status for solid
-  const { session } = useSession();
-
-  //We have logged in
-  session.onLogin(() => {
-    setIsLoggedIn(true)
-  })
-
-  //We have logged out
-  session.onLogout(() => {
-    setIsLoggedIn(false)
-  })
-  
- 
   return (
-      <BrowserRouter>
-        <div className="App">
+    <BrowserRouter>
+      <div className="App">
+        <LoggedOut>
+        <Switch>
+          <Route path="/login">
+            <LogIn />
+          </Route>
+          <Route path="/radmin">
+            <RAdmin />
+          </Route>
+          <Route path="/administrar">
+            <Admin />
+          </Route>
+          <Route path="/error">
+            <PaginaBloqueada />
+          </Route>
+          <Route path="/">
+            <LogIn />
+          </Route>
+          </Switch>
+        </LoggedOut>
+        <LoggedIn>
           <header>
             <MNavBar />
           </header>
           <div style={{ height: "60px" }}>
           </div>
-          {(!isLoggedIn) ? <LogIn/> : 
           <Switch>
             <Route path="/login">
-              <MapView />
+              <LogIn />
             </Route>
             <Route path="/perfil">
-            <Profile />
+              <Profile />
             </Route>
             <Route path="/amigos">
               <Friends />
@@ -66,11 +70,12 @@ function App(props) {
                 <MapView />
               </div>
             </Route>
-          </Switch>}
-          </div>
-      </BrowserRouter>
-  );
+          </Switch>
+        </LoggedIn>
+      </div>
+    </BrowserRouter>
+
+  )
 }
-//<Welcome name={getDefaultSession().info.webId} />
 
 export default App;

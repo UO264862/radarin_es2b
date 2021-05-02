@@ -7,7 +7,17 @@ export async function getNumeroUsuarios() {
     return await response.json()
 }
 
-
+// Devuelve todos los usuarios
+export async function getUsuarios() {
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint + '/usuarios',{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(
+            { })
+    })
+    return await response.json()
+}
 
 //Añadir usuario COMPROBAR
 export async function addUsuario(webid) {
@@ -22,6 +32,49 @@ export async function addUsuario(webid) {
     })
     return await response.json()
 }
+
+//Bloquear cuenta de usuario COMPROBAR
+export async function bloquearUsuario(webid) {
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint + '/usuario/bloquear', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(
+            {
+                'webid': webid,
+            })
+    })
+    return await response.json()
+}
+
+//Desbloquear cuenta de usuario COMPROBAR
+export async function desbloquearUsuario(webid) {
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint + '/usuario/desbloquear', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(
+            {
+                'webid': webid,
+            })
+    })
+    return await response.json()
+}
+
+// Devuelve el estado de la cuenta de un usuario
+export async function getEstadoCuentaUsuario(webid) {
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint + '/usuario/estadoCuenta',{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(
+            { 
+                'webid': webid,
+            })
+    })
+    return await response.json()
+}
+
 
 //Modificar nombre de usuario COMPROBAR
 export async function modificarNombreUsuario(webid, nombreUsuario) {
@@ -53,19 +106,12 @@ export async function modificarCoordenadas(webid, coordinates) {
     return await response.json()
 }
 
-//METODO PAR LLAMAR A ESTE METODO CADA X TIEMPO (ESTA PUESTO 20 segs) ESTO HAY QUE PONERLO DONDE SE LLAME AL DE ARRIBA, HAY QUE PONER PARAMETROS
-//import { useEffect } from "react"
-/*useEffect(()=>{
-    setInterval(modificarCoordenadas("webid","coordenadas"),20000)
-});
-*/
-
 //Obtener webid con nombre de usuario COMPROBAR
 export async function getWebIdByUsername(nombreUsuario) {
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint + '/usuario/nombreUsuario', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(
             {
                 'nombreUsuario': nombreUsuario
@@ -88,10 +134,10 @@ export async function getUsernameByWebId(webId) {
     return await response.json()
 }
 
-//Obtener nombre de usuario con webid COMPROBAR
-export async function getUsernameByWebId(webId) {
+//Obtener usuario con webid COMPROBAR
+export async function getUsuarioByWebId(webId) {
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    let response = await fetch(apiEndPoint + '/usuario/webId', {
+    let response = await fetch(apiEndPoint + '/usuario', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(
