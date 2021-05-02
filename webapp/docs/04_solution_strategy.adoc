@@ -2,27 +2,19 @@
 == Estrategia de solución
 
 === Contenido
-Para llevar a cabo el desarrollo de la aplicación, utilizaremos JavaScript junto con su biblioteca https://es.reactjs.org/[React]. 
-Se ha llegado a esta decisión dadas las recomendaciones del profesorado de la asignatura. Además de esto, nos parece un lenguaje que 
-proporciona grandes facilidades para el proceso de desarrollo de aplicaciones web y para su ampliación mediante módulos externos. 
-A su vez, https://es.reactjs.org/[React] nos ayudará en cuanto al diseño de interfaces suprimiendo la mayoría de las 
-dificultades del uso único de JavaScript y nos facilitará el desarrollo de la aplicación móvil.
+Para llevar a cabo el desarrollo de la aplicación, utilizaremos JavaScript junto con su biblioteca https://es.reactjs.org/[React]. Se ha llegado a esta decisión dadas las recomendaciones del profesorado de la asignatura. Además de esto, nos parece un lenguaje que proporciona grandes facilidades para el proceso de desarrollo de aplicaciones web y para su ampliación mediante módulos externos. A su vez, https://es.reactjs.org/[React] nos ayudará en cuanto al diseño de interfaces suprimiendo la mayoría de las dificultades del uso único de JavaScript y nos facilitará el desarrollo de la aplicación móvil.
 
-Para la comunicación del proyecto y su desarrollo conjunto se utilizará https://github.com/[GitHub], no solo por sus ventajas en 
-cuanto al control de versiones sino también para la creación de issues para cada integrante del grupo. https://github.com/[GitHub] 
-también proporciona una Wiki en la que se llevará a cabo el control de acuerdos tomados en cada reunión junto con las tareas 
+Para la comunicación del proyecto y su desarrollo conjunto se utilizará https://github.com/[GitHub], no sólo por sus ventajas en cuanto al control de versiones sino también para la creación de issues para cada integrante del grupo. https://github.com/[GitHub] también proporciona una Wiki en la que se llevará a cabo el control de acuerdos tomados en cada reunión junto con las tareas 
 realizadas desde la reunión previa.
 
-Se utilizará la https://wiki.openstreetmap.org/wiki/API[API] de https://www.openstreetmap.org/[OpenStreetMap] para la visualización 
-de un mapa interactivo, con la cual tenemos mayor experiencia y simplificará esta parte del proyecto.
+Se utilizará la https://wiki.openstreetmap.org/wiki/API[API] de https://www.openstreetmap.org/[OpenStreetMap] para la visualización de un mapa interactivo, con la cual tenemos mayor experiencia y simplificará esta parte del proyecto.
 
 === Tecnologías
-* JavaScript: Lenguaje de programación mundialmente conocido para el desarrollo de aplicaciones web.
-* https://es.reactjs.org/[React]: Librería de Javascript que proporciona facilidades en el diseño de interfaces.
-* https://github.com/[GitHub]: Tecnología de control de versiones recomendada para el trabajo cooperativo.
-* https://www.openstreetmap.org/[OpenStreetMap] https://wiki.openstreetmap.org/wiki/API[API]: Proyecto de creación de mapas interactivos y editables.
-* https://www.mongodb.com/cloud/atlas/[MongoDbAtlas] : Base de datos MongoDb Atlas.
+* *JavaScript*: Lenguaje de programación mundialmente conocido para el desarrollo de aplicaciones web.
+* *https://es.reactjs.org/[React]*: Librería de Javascript que proporciona facilidades en el diseño de interfaces.
+* *https://github.com/[GitHub]*: Tecnología de control de versiones recomendada para el trabajo cooperativo.
+* *https://www.openstreetmap.org/[OpenStreetMap] https://wiki.openstreetmap.org/wiki/API[API]*: Proyecto de creación de mapas interactivos y editables.
+* *https://www.mongodb.com/cloud/atlas/[MongoDbAtlas]* : Base de datos MongoDB Atlas.
 
 === Motivaciones
-Todas estas tecnologías a las que nos adaptaremos nos ayudarán a mejorar como programadores y desarrolladores de aplicaciones y nos permitirá 
-adecuarnos a los principios de https://solidproject.org/[SoLiD].
+Todas estas tecnologías a las que nos adaptaremos nos ayudarán a mejorar como programadores y desarrolladores de aplicaciones y nos permitirá adecuarnos a los principios de https://solidproject.org/[SoLiD].

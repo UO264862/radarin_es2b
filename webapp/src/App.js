@@ -13,7 +13,6 @@ import LogIn from './ui/LogIn';
 import MapView from './ui/MapView';
 import MNavBar from './ui/MNavBar';
 import Profile from './ui/Profile';
-import PaginaBloqueada from './ui/PaginaBloqueada';
 import Admin from './ui/Admin';
 import RAdmin from './ui/RAdmin';
 import { ListarUsuarios } from './ui/Admin';
@@ -41,11 +40,7 @@ function App(props) {
                 <Admin method={ListarUsuarios} />
                 <Link to="/" >Volver</Link>
               </Route>
-              <Route exact path="/error">
-                <PaginaBloqueada />
-                <Link to="/" >Volver</Link>
-              </Route>
-              <Route exact path="/">
+              <Route exact path="/*">
                 <LogIn />
               </Route>
             </Switch>

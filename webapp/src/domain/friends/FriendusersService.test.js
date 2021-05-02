@@ -7,5 +7,4 @@ test ("comprobar que el friendUsersService funciona correctamente", async () => 
   expect(await friendUsersService.isAmigo("webid")).toBe(false);
   expect(await friendUsersService.isWebIdValid("webid")).toBe(undefined);
   expect(await friendUsersService.obtenerAmigos()).toStrictEqual(lista);
-  expect(await friendUsersService.deleteFriendRequest("a","b")).toStrictEqual(undefined);
 });

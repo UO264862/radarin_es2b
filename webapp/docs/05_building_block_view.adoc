@@ -2,76 +2,124 @@
 
 == Perspectiva de la construcción de los bloques
 
-En esta sección se descompone estáticamente nuestro sistema en bloques de construcción mostrando sus dependencias internas.
-
-Con una vista general, pretendemos dar una idea estructurada del código fuente, de modo que sea fácil de entender sin detalles de implementación.
-
-Se explicará de más general a más concreto.
-
+En esta sección se descompone estáticamente nuestro sistema en bloques de construcción mostrando sus dependencias internas. Con una vista general, pretendemos dar una idea estructurada del código fuente, de modo que sea fácil de entender sin detalles de implementación. Se explicará de más general a más concreto.
 
 === Nivel 1
 
-image:05_nivel1.png["Diagrama nivel 1"]
+// image:05_nivel1.png["Diagrama nivel 1"]
+
+[plantuml, building_block_view1, svg]
+----
+interface "Usuario" as U
+database "SoLiD" {
+   [POD]
+}
+database "MongoDB" {
+   [Base de datos]
+}
+[RadarIn] <-> [POD] : "intercambia datos"
+[RadarIn] <-> [Base de datos] : "intercambia datos"
+U --> [RadarIn]
+----
+
+[.text-right]
+Figura 5.1. Perspectiva de la construcción de los bloques (Nivel 1).
 
 .Bloque de nivel 1:
-* El usuario interacciona con la aplicacións para buscar amigos.
+* El usuario interacciona con la aplicación para buscar amigos.
 * La aplicación accede a los archivos del POD para obtener y guardar datos.
 
 [options = "header", cols = "1,2"]
 |===
  Componente | Responsabilidad |
- Usuario |
+ *Usuario* |
     Es el usuario que interacciona con la aplicación. |
- Radarin |
+ *RadarIn* |
     Es la aplicación con la que interacionará el usuario. |
- POD |
+ *POD* |
     Es el servicio de almacenamiento escogido. Almacenará la información básica del usuario y sólo se tendrá acceso a él con la autorización del usuario propietario. |
 |===
 
 === Nivel 2
 
-image:05_nivel2.png["Diagrama nivel 2"]
+// image:05_nivel2.png["Diagrama nivel 2"]
+
+[plantuml, building_block_view2, svg]
+----
+package "RadarIn" {
+   [Inicio de sesión]
+   [Registro]
+   [Petición de amistad]
+   [Notificaciones]
+   [Listado de amigos]
+   [Visualización del mapa]
+}
+----
+
+[.text-right]
+Figura 5.2. Perspectiva de la construcción de los bloques (Nivel 2).
 
 En este nivel se empieza a detallar sobre todos los contenedores con los que interactuará el usuario una vez esté desarrollada la aplicación. Son todas las opciones que tendrá la aplicación.
 
 [options = "header", cols = "1,2"]
 |===
  Contenedor | Responsabilidad |
- Registro |
-    Antes de empezar a usar la aplicación el usuario necesitará registrarse con sus datos personales para tener acceso a guardar datos en su POD. |
- _Login_ |
+ *Inicio de sesión* |
     Una vez el usuario esté registrado, cada vez que use la aplicación tendrá que entrar en sesión para que sus datos se puedan guardar. |
- Mis Amigos |
-    Es la lista de amigos del usuario, podrá añadir más amigos o eliminarlos. |
- Nuevo Amigo |
+ *Registro* |
+    Antes de empezar a usar la aplicación el usuario necesitará registrarse con sus datos personales para tener acceso a guardar datos en su POD. |
+ *Petición de amistad* |
     Envía una solicitud de amistad al amigo que deseamos añadir a nuestra lista. Nuestro amigo tendrá que aceptar la solicitud para poder tener acceso a sus datos principales. |
- Notificaciones |
+ *Notificaciones* |
     La aplicación enviará una notificación cada vez que un amigo nuestro esté cerca. Podremos activarlas y desactivarlas. |
- Mapa |
+ *Listado de amigos* |
+    Es la lista de amigos del usuario, podrá añadir más amigos o eliminarlos. |
+ *Visualización del mapa* |
     Habrá un mapa dentro de la aplicación para mostrar nuestra situación respecto a la de nuestros amigos. |
 |===
 
 === Nivel 3
 
-image:05_nivel3.png["Diagrama nivel 3"]
+// image:05_nivel3.png["Diagrama nivel 3"]
 
-Este último nivel es el más detallado y el más bajo. Nos da una visión de la lógica necesaria para comunicarse con el POD del usuario para acceder a sus datos.
+[plantuml, building_block_view3, svg]
+----
+package "RadarIn" {
+   [App] --> [MNavBar]
+   [App] --> [About]
+   [App] --> [Admin]
+   [App] --> [Friends]
+   [App] --> [LogIn]
+   [App] --> [MapView]
+   [App] --> [PlaceholderPage]
+   [App] --> [Profile]
+}
+----
+
+[.text-right]
+Figura 5.3. Perspectiva de la construcción de los bloques (Nivel 3).
+
+Este último nivel es el más detallado y el más bajo. Nos da una visión de la arquitectura de los componentes del sistema.
 
 [options = "header", cols = "1,2"]
 |===
  Nombre | Responsabilidad |
- _RadarinManager_ |
-    Será un manager intermediario entre el servidor y la capa de usuario (interfaz de usuario). |
- Permisos |
-    Los permisos dentro de la aplicación son una parte muy importante. 
-    Por ello habrá un servicio encargado de manejar los permisos de cada usuario. 
-    Un usuario sin permisos no podrá acceder a los datos de otro usuario y es éste mismo el encargado de dar/quitar permisos a otros usuarios (sus amigos). |
- _Parser_ |
-    La aplicación necesita un parser para transformar los archivos del POD de una forma que el usuario los pueda leer sin problemas. |
- _HelpAmigos_ |
-    También necesitará un servicio para poder añadir, borrar y almacenar amigos. |
- _HelpNotificaciones_ |
-    Este es el servicio encargado de enviar notificaciones al usuario cuando un amigo está cerca. |
- _HelpMapa_ |
-    También tendrá que haber un servicio que localice en un mapa a los usuarios amigos. |
+ *_App_* |
+    Se trata del componente principal, la capa más superior de la interfaz de usuario, en la que se acoplan el resto de componentes. |
+ *_MNavBar_* |
+    Representa la barra de navegación de la aplicación. Sirve para navegar a través del resto de componentes. |
+ *_About_* |
+    Muestra en detalle la información sobre la aplicación y sobre sus desarrollo. |
+ *_Admin_* |
+    Representa el componente que utiliza un administrador para interactuar con el sistema. |
+ *_Friends_* |
+    Ofrece una interfaz para enviar o aceptar solicitudes de amistad, además de ver la lista de amigos. |
+ *_LogIn_* |
+    Encapsula el proceso de inicio de sesión. |
+ *_MapView_* |
+    Representa el mapa, en el cual se insertan los marcadores que representan al usuario y a los amigos. |
+ *_PlaceholderPage_* |
+    Muestra una información por defecto en la aplicación. |
+ *_Profile_* |
+    Presenta el perfil del usuario que ha iniciado sesión, además de permitir modificarlo. |
 |===

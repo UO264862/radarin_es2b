@@ -4,11 +4,11 @@
 }
 
 .loginbackground {
-  background: url("../img/pexels-cottonbro-\ peque-5967048.jpg");
+  background: url("../img/pexels-cottonbro-5967048.jpg") ;
+  background-size: cover;
   background-repeat: no-repeat;
-  height: 10000px;
-  width: 10000px;
-  background-color: white;
+  background-position: center;
+  height: 100vh;
 }
 
 .container-buttons {
