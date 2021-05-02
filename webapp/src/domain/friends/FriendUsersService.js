@@ -9,6 +9,9 @@ import FC from "solid-file-client";
 import { toast } from "react-toastify";
 import FileClient from "solid-file-client";
 import { addFriendRequest, getWebIdByUsername, eliminarSolicitud, aceptarSolicitud, getSolicitudesCompletadas, getSolicitudesPendientes, getUsernameByWebId } from "../../api/api";
+import React from "react";
+import ReactDOM from 'react-dom';
+import {Friends} from '../../ui/Friends'
 
 
 
@@ -266,7 +269,10 @@ class FriendsService {
     return false;
   }
   reload = () => {
-    window.location.reload();
+    ReactDOM.render(
+          <Friends />,
+      document.getElementById('friends')
+    );
   };
 
   async getSession() {
