@@ -14,6 +14,7 @@ function LogIn(props) {
             </Grid>
             <Link to="/radmin" >Accede como administrador</Link>
         </div>
+        
         </div>
     )
 }

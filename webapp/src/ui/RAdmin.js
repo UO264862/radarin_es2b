@@ -12,7 +12,6 @@ export default class RAdmin extends React.Component {
     var hash = CryptoJS.SHA256(password);
     hash = hash.toString(CryptoJS.enc.Base64)
     if (hash === "siHZ27CDp/M0KNfCo8MZiuklYU1wIQ4ocWzKp81N23k=") {
-      console.log("admin cambiado")
       this.setState({ admin: true })
     }
   }
