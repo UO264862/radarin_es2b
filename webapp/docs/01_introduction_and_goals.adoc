@@ -1,38 +1,85 @@
 [[section-introduction-and-goals]]
 == Introducción y objetivos
 
-En este trabajo se intentara desarrollar un sistema para facilitar encuentros entre amigos utilizando nuevas tecnologías. De esta forma permitirá
-avisar a un usuario cuándo tiene amigos cerca para que puedan entrar en contacto.
+RadarIn será un sistema para facilitar encuentros entre amigos utilizando nuevas tecnologías.  y 
 
-=== Resumen de los requisitos
+La aplicación permitirá de esa forma avisar a un usuario cuándo tiene amigos cerca para que puedan entrar en contacto.
 
-* Implementación de una aplicación que trabaje con PODs para el almacenaje de la información sobre localizaciones.
-* Radarín permitirá que los usuarios puedan gestionar y visualizar sus localizaciones y también incluirá opciones de administración para gestionar usuarios y monitorizar el estado del servidor.
-* Implementación de una aplicación móvil que funcionará en el dispositivo móvil de los usuarios enviando localizaciones al servidor y recibiendo notificaciones de usuarios conocidos cercanos.
-* Radarin será desplegable desde contenedores docker y también estará desplegada en un servicio en la nube como https://www.heroku.com/[Heroku].
+=== Requisitos básicos de la aplicación
+
+* El sistema será compatible con el https://solidproject.org/[Proyecto SoLiD].
+* El sistema no almacenará información personal sobre los usuarios de forma centralizada sino que trabajará con https://solidproject.org//users/get-a-pod[PODs] para el almacenaje de la información sobre localizaciones.
+* La aplicación podrá acceder a la información de localización del teléfono móvil de los usuarios que voluntariamente la tengan activada.
+* La aplicación permitirá a otros usuarios que sean sus amigos conocer cuándo están cerca.
+
+==== Requisitos de componente software
+
+La aplicación contemplará, como mínimo, dos componentes software aquí detallados.
+
+===== Componente software de usuario
+
+La aplicación:
+
+* Funcionará en un servidor en el cual se almacenará información sobre localizaciones.
+* Permitirá que los usuarios puedan gestionar y visualizar sus localizaciones.
+
+===== Componente software de administrador
+
+La aplicación incluirá opciones de administración para:
+
+* Gestionar usuarios.
+* Monitorizar el estado del servidor
+
+==== Requisitos de privacidad de datos
+
+* La aplicación que actúa como servidor almacenará la información mínima necesaria sobre un usuario.
+* El resto de información del usuario, como sus amigos, será consultada en el pod de dicho usuario.
+
+==== Requisitos de tecnología de despliegue
+
+El sistema:
+
+* Será desplegable desde contenedores https://www.docker.com/[Docker].
+* Estará desplegado en un servicio en la nube como https://heroku.com/[Heroku].
 * La aplicación móvil desplegada también incluirá un sistema de monitorización.
-* Se desarrollarán pruebas unitarias, de aceptación y de carga que se ejecutarán de forma automatizada a través de un servidor de integración continua.
+
+==== Requisitos de robustez
+
+Se desarrollarán pruebas ejecutadas de forma automatizada a través de un servidor de integración continua. Las pruebas serán las siguientes:
+
+* Pruebas unitarias.
+* Pruebas de aceptación.
+* Pruebas de carga.
 
 .Motivaciones
-En estas épocas de COVID-19 el uso de mascarilla dificulta el reconocimiento facial. Queremos que el cliente final pueda distinguir a sus amigos aunque lleven mascarilla y puedan interaccionar entre ellos respetando las medidas establecidas.
+
+* _La soledad es un problema real que afecta cada vez a más personas de todas las edades y no sólo a las personas mayores, como se suele pensar. Lo cual nos lleva a pensar si hay soledad buscada y deseada o siempre es inducida por la matriz ambiental del ecosistema social de cada persona, llevando a situaciones no deseadas, que generan falta de calidad de vida o incluso enfermedad._
+
+[.text-right]
+https://www.revista-critica.es/2018/07/24/soledad-una-epidemia-en-el-mundo-actual[Soledad, una epidemia en el mundo actual (Revista Crítica)]
+
+Queremos fomentar una facilidad de contacto entre personas para prevenir la soledad, y por ende los problemas psicológicos que ésta pudiera causar en las personas.
+
+* En estas épocas de COVID-19 el uso de mascarilla dificulta el reconocimiento facial.
+
+Queremos que el cliente final pueda distinguir a sus amigos aunque lleven mascarilla y puedan interaccionar entre ellos respetando las medidas establecidas.
 
 === Objetivos de calidad
 
 [options = "header", cols = "1,2,2"]
 |===
  Objetivo | Motivación | Prioridad |
-
- Privacidad |
-    Es importante mantener la privacidad de los datos de cada usuario almacenándolos en su propio POD |
+ *Privacidad* |
+    Es importante mantener la privacidad de los datos de cada usuario almacenándolos en su propio POD. |
         Muy alta |
- Usabilidad |
-    El usuario debe sentirse cómodo usando nuestra Radarin independientemente de sus conocimientos de informática |
+ *Usabilidad* |
+    El usuario debe sentirse cómodo usando nuestra Radarin independientemente de sus conocimientos de informática. |
         Alta |
- Eficiencia |
-    Un tiempo de respuesta largo puede hacer pensar al usuario que Radarin no funciona y, por tanto, dejaría de usarla |
+ *Eficiencia* |
+    Un tiempo de respuesta largo puede hacer pensar al usuario que Radarin no funciona y, por tanto, dejaría de usarla. |
         Alta |
- Portabilidad |
-    El usuario podrá correr la aplicación movil en la mayoría de los dispositivo móviles|
+ *Portabilidad* |
+    El usuario podrá correr la aplicación movil en la mayoría de los dispositivo móviles. |
         Media |
 |===
 
@@ -41,13 +88,13 @@ En estas épocas de COVID-19 el uso de mascarilla dificulta el reconocimiento fa
 [options = "header", cols = "1,2,2"]
 |===
  Rol | Descripción | Expectativas |
- Clientes |
-    Evaluarán nuestro proyecto |
-        Comprobar que Radarin cumple los requerimientos acordados |
- Usuarios y Usuarios registrados |
-    Usar la aplicación |
-        Uso de Radarin utilizando las diferentes funcionalidades |
- Desarrolladores |
-    Encargados de desarrollo y realización de pruebas de Radarin |
-        Hacer que Radarin sea funcional cumpliendo los requisitos y requerimientos |
+ *Clientes* |
+    Evaluarán nuestro proyecto. |
+        Comprobar que RadarIn cumple los requerimientos acordados. |
+ *Usuarios y usuarios registrados* |
+    Usan la aplicación. |
+        Uso de RadarIn utilizando las diferentes funcionalidades. |
+ *Desarrolladores* |
+    Encargados de desarrollo y realización de pruebas de RadarIn. |
+        Hacer que RadarIn sea funcional cumpliendo los requisitos y requerimientos. |
 |===

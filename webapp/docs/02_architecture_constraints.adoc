@@ -5,15 +5,15 @@
 [options = "header", cols = "1,2"]
 |===
  Restricción | Descripción |
- https://solidproject.org/[_SoLiD_] |
+ *https://solidproject.org/[_SoLiD_]* |
     El uso de solid nos implica que sea una aplicación descentralizada teniendo que tener hacer uso de los POD. |
- https://github.com/[GitHub] |
+ *https://github.com/[GitHub]* |
     Nuestro proyecto originalmente está alojado en esta plataforma. |
- Uso exclusivo desde el movil |
+ *Uso exclusivo desde el móvil* |
 	Es obligatorio que se desarrolle una aplicación móvil para acceder a la aplicación
- https://arc42.org/[Arc42] |
+ *https://arc42.org/[Arc42]* |
     Es requisito recomendado su uso para la documentación. |
- Tests |
+ *Tests* |
     Uso obligatorio de pruebas unitarias para probar el buen funcionamiento. |
 |===
 
