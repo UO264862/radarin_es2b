@@ -125,7 +125,7 @@ const Perfil = () => {
                 if (textEdit === "Confirmar") {
                   setText("Editar perfil");
                   modificarNombreUsuario(
-                    getDefaultSession().info.webId,
+                    webId,
                     document.getElementById("input").value
                   );
                   setBorder("0px solid");

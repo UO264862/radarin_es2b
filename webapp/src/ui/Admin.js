@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Button} from "@material-ui/core";
 import {desbloquearUsuario,bloquearUsuario, getUsuarios} from "../api/api.js"
+import './Admin.css';
 
 let usuarios=[]
 
@@ -33,10 +34,10 @@ export const Usuario =({usuario, desbloquear, bloquear})=>{
   const desblo = desbloquear
   const blo = bloquear
     return(
-        <div className="card" >
+        <div  >
             <div>
                 <h4 className="lista">
-                    <p>Usuario:</p><span>{nombre}</span><br/><p>WebId:</p><span>{webid}</span>
+                    <p className="admin-title-name">Usuario:</p><span className="admin-name">{nombre}</span><br/><p className="admin-title-webid">WebId:</p><span className="admin-webid">{webid}</span>
                 </h4> 
                 <center>
                     <div className="botones"> 
