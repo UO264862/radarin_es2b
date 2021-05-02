@@ -1,7 +1,7 @@
 [[section-introduction-and-goals]]
 == Introducción y objetivos
 
-RadarIn será un sistema para facilitar encuentros entre amigos utilizando nuevas tecnologías.  y 
+RadarIn será un sistema para facilitar encuentros entre amigos utilizando nuevas tecnologías.
 
 La aplicación permitirá de esa forma avisar a un usuario cuándo tiene amigos cerca para que puedan entrar en contacto.
 

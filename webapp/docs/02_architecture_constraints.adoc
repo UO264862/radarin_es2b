@@ -6,11 +6,11 @@
 |===
  Restricción | Descripción |
  *https://solidproject.org/[_SoLiD_]* |
-    El uso de solid nos implica que sea una aplicación descentralizada teniendo que tener hacer uso de los POD. |
+    El uso de SoLiD nos implica que sea una aplicación descentralizada teniendo que tener hacer uso de los POD. |
  *https://github.com/[GitHub]* |
     Nuestro proyecto originalmente está alojado en esta plataforma. |
  *Uso exclusivo desde el móvil* |
-	Es obligatorio que se desarrolle una aplicación móvil para acceder a la aplicación
+	Es obligatorio que se desarrolle una aplicación móvil para acceder a la aplicación. |
  *https://arc42.org/[Arc42]* |
     Es requisito recomendado su uso para la documentación. |
  *Tests* |
@@ -21,11 +21,11 @@
 [options = "header", cols = "1,2"]
 |===
  Restricción | Descripción |
- Tiempo |
-    El desarrollo de todo el proyecto esta limitado, sólo se dispone de 3 meses. |
- Miembros |
-    En este proyecto somos 5 estudiantes de la Universidad de Oviedo, con lo cual no podremos centrarnos exclusivamente en este proyecto. |
- Entregas |
+ *Tiempo* |
+    El desarrollo de todo el proyecto esta limitado, sólo disponemos de lo que dure el cuatrimestre. |
+ *Miembros* |
+    Nuestra condición de estudiantes universitarios nos impide dedicarnos completamente al proyecto RadarIn, ya que, además de a este proyecto, debemos prestar parte de nuestro tiempo a otras asignaturas. |
+ *Entregas* |
     Hay entregas previas a la finalizacion del proyecto, con lo cual es necesario trabajar de forma constante sobre el proyecto. |
 |===
 
@@ -33,6 +33,8 @@
 [options = "header", cols = "1,2"]
 |===
  Restricción | Descripción |
-	https://www.boe.es/buscar/pdf/2018/BOE-A-2018-16673-consolidado.pdf[Ley_Orgánica_de_Protección_de_Datos_] | La finalidad de la LOPDGDD es proteger la intimidad, privacidad e integridad del individuo. |
-	https://rgpd.es/[_El_Reglamento_General_de_Protección_de_Datos_]  | El reglamento europeo relativo a la protección de las personas físicas en lo que respecta al tratamiento de sus datos personales y a la libre circulación de estos datos. |
+ *https://ayudaleyprotecciondatos.es/lopdgdd/[Ley Orgánica de Protección de Datos y Garantía de los Derechos Digitales (LOPDGDD)]* |
+   A nivel de cumplimiento de las regulaciones españolas, debemos cumplir la ley que regula el tratamiento de datos de carácter personal en España. |
+ *https://gdpr.eu/[Reglamento General de Protección de Datos (RGPD)]* |
+   A nivel de país miembro de la Unión Europea, debemos cumplir el reglamento europeo relativo a la protección de las personas físicas en lo que respecta al tratamiento de sus datos personales y a la libre circulación de estos datos. |
 |===
