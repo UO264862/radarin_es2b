@@ -71,3 +71,12 @@ html, html body {
 .line {
   border-top: 2px solid rgb(119, 111, 111);
 }
+
+.inputEdit{
+  text-align: center;
+}
+
+.inputEdit::-webkit-input-placeholder {
+  color: black; /*Change the placeholder color*/
+  opacity: 1; /*Change the opacity between 0 and 1*/
+}

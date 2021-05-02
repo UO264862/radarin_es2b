@@ -1,7 +1,5 @@
-
-import React,{useEffect, useState, useCallback} from "react"
+import React, { useEffect, useState, useCallback } from "react";
 import {
-  useSession,
   CombinedDataProvider,
   Image,
   LogoutButton,
@@ -17,29 +15,43 @@ import {
   IconButton,
 } from "@material-ui/core";
 
-import { modificarNombreUsuario,getUsernameByWebId } from "../../api/api";
+import { modificarNombreUsuario, getUsernameByWebId } from "../../api/api";
 import { getDefaultSession } from "@inrupt/solid-client-authn-browser";
 import EditIcon from "@material-ui/icons/Edit";
 import { FOAF, VCARD } from "@inrupt/lit-generated-vocab-common";
-import "./Profile.css";
+import "./profile.css";
+import { useWebId } from "@solid/react";
 
 const Perfil = () => {
-  const { session } = useSession();
-  const { webId } = session.info;
+  const  webId  = useWebId();
   const [editing, setEditing] = useState(false);
   const [textEdit, setText] = useState("Editar perfil");
   const [colorEdit, setColor] = useState("#E5DBD4");
-  const [nombre,setNombre] = useState(null);
+  const [nombre, setNombre] = useState(null);
+  const [isBorder, setBorder] = useState("0px solid");
 
-  var getUserName=useCallback(async function(){
-     getUsernameByWebId(webId).then(user=>{
-       setNombre(user.nombreUsuario);
-     }).catch(err=>console.log(err));
-  },[setNombre,webId]);
+  var getUserName = useCallback(
+    async function () {
+      getUsernameByWebId(webId)
+        .then((user) => {
+          setNombre(user.nombreUsuario);
+        })
+        .catch((err) => console.log(err));
+    },
+    [setNombre, webId]
+  );
 
-  useEffect(()=>{
+  useEffect(() => {
     getUserName();
-  },[getUserName]);
+  }, [getUserName]);
+
+  function setDisabled(){
+    document.getElementById("input").setAttribute("disabled", true);
+  }
+
+  function setEnabled(){
+    document.getElementById("input").removeAttribute("disabled");
+  }
 
   return (
     <Container className="fixed">
@@ -59,6 +71,14 @@ const Perfil = () => {
           </CardActionArea>
           <hr />
           <CardContent>
+            <Typography>
+              <span className="perfil-span">Nombre de Usuario:</span>
+              <br />
+              <div>
+                <input disabled style={{ border: isBorder }} className = "inputEdit" id="input" type="text" placeholder={nombre}></input>
+              </div>
+            </Typography>
+            <hr />
             <Typography>
               <span className="perfil-span">WebID:</span> {webId}
             </Typography>
@@ -84,10 +104,7 @@ const Perfil = () => {
                 autosave
               />
             </Typography>
-            <Typography>
-              <span className="perfil-span">Nombre de Usuario:</span><br/> <Text className="text" property={FOAF.name.iri.value} />
-            </Typography>
-            <hr className="line"/>
+            <hr className="line" />
             <Typography>
               <span className="perfil-span">Descripcion:</span> <br />
               <Text
@@ -103,27 +120,32 @@ const Perfil = () => {
             <IconButton
               class="edit"
               size="small"
-              style={{backgroundColor : colorEdit }}
+              style={{ backgroundColor: colorEdit }}
               onClick={() => {
                 setEditing(!editing);
-                textEdit === "Confirmar"
-                  ? setText("Editar perfil")
-                  : setText("Confirmar");
-                colorEdit === "#A4BC96"
-                  ? setColor("#E5DBD4")
-                  : setColor("#A4BC96");
+                if (textEdit === "Confirmar") {
+                  setText("Editar perfil");
+                  modificarNombreUsuario(
+                    getDefaultSession().info.webId,
+                    document.getElementById("input").value
+                  );
+                  setBorder("0px solid");
+                  setDisabled();
+                } else {
+                  setText("Confirmar");
+                  setBorder("1px solid");
+                  setEnabled();
+                }
+                  if(colorEdit === "#A4BC96"){
+                  setColor("#E5DBD4");
+                } else setColor("#A4BC96");
               }}
             >
               {textEdit} <EditIcon />
             </IconButton>
           </CardActions>
           <br />
-          <hr/>
-          <div>
-            <input id="input" type="text" ></input>
-            <button onClick={()=>modificarNombreUsuario(getDefaultSession().info.webId,document.getElementById("input").value)} ></button>
-            <p>{nombre}</p>
-          </div>
+          <hr />
           <LogoutButton>
             <button className="botonLogout">
               <span className="logout">Logout</span>
@@ -133,7 +155,6 @@ const Perfil = () => {
         </Card>
       </CombinedDataProvider>
     </Container>
-    
   );
 };
 

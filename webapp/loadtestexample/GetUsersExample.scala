@@ -33,10 +33,10 @@ class GetUsersExample extends Simulation {
 
 	val headers_6 = Map("Accept" -> "image/webp,*/*")
 
-	val headers_7 = Map("Origin" -> "https://radarin0webapp.herokuapp.com")
+	val headers_7 = Map("Origin" -> "https://radarines2bwebapp.herokuapp.com")
 
-    val uri1 = "https://radarin0webapp.herokuapp.com"
-    val uri3 = "https://radarin0restapi.herokuapp.com/api/users/list"
+    val uri1 = "https://radarines2bwebapp.herokuapp.com"
+    val uri3 = "https://radarines2brestapi.herokuapp.com/api/users/list"
 
 	val scn = scenario("GetUsersExample")
 		.exec(http("request_0")
