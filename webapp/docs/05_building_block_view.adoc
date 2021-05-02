@@ -80,7 +80,7 @@ En este nivel se empieza a detallar sobre todos los contenedores con los que int
 
 === Nivel 3
 
-image:05_nivel3.png["Diagrama nivel 3"]
+// image:05_nivel3.png["Diagrama nivel 3"]
 
 [plantuml, building_block_view3, svg]
 ----
