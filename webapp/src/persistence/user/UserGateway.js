@@ -13,10 +13,8 @@ class UserGateway {
                 const json = await response.json();
                 return json.nombreUsuario;
             } catch (error) {
-                console.log(error);
             }
         } catch (error_1) {
-            console.log(error_1);
         }
     }
     async updateCoords(webId, coordinates) {

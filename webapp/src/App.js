@@ -1,80 +1,82 @@
 // External dependences
 import React from 'react';
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Switch, Route, BrowserRouter,Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { LoggedOut, LoggedIn } from "@solid/react";
+import { SessionProvider } from "@inrupt/solid-ui-react";
 
 // Dependences from: ~/ui
 import './App.css';
-import About from './ui/about/About';
-import Friends from './ui/friends/Friends';
-import LogIn from './ui/logIn/LogIn';
-import MapView from './ui/map/MapView';
-import MNavBar from './ui/navBar/MNavBar';
-import Profile from './ui/profile/Profile';
-import PaginaBloqueada from './ui/admin/PaginaBloqueada';
-import Admin from './ui/admin/Admin';
-import RAdmin from './ui/admin/RAdmin';
+import About from './ui/About';
+import { Friends } from './ui/Friends';
+import LogIn from './ui/LogIn';
+import MapView from './ui/MapView';
+import MNavBar from './ui/MNavBar';
+import Profile from './ui/Profile';
+import Admin from './ui/Admin';
+import RAdmin from './ui/RAdmin';
+import { ListarUsuarios } from './ui/Admin';
+
 
 function App(props) {
 
- //pide permisos de notificaciones al usuario
- Notification.requestPermission();
+  //pide permisos de notificaciones al usuario
+  //Notification.requestPermission();
 
   return (
-    <BrowserRouter>
-      <div className="App">
-        <LoggedOut>
-        <Switch>
-          <Route path="/login">
-            <LogIn />
-          </Route>
-          <Route path="/radmin">
-            <RAdmin />
-          </Route>
-          <Route path="/administrar">
-            <Admin />
-          </Route>
-          <Route path="/error">
-            <PaginaBloqueada />
-          </Route>
-          <Route path="/">
-            <LogIn />
-          </Route>
-          </Switch>
-        </LoggedOut>
-        <LoggedIn>
-          <header>
-            <MNavBar />
-          </header>
-          <div style={{ height: "60px" }}>
-          </div>
-          <Switch>
-            <Route path="/login">
-              <LogIn />
-            </Route>
-            <Route path="/perfil">
-              <Profile />
-            </Route>
-            <Route path="/amigos">
-              <Friends />
-            </Route>
-            <Route path="/mapa">
-              <MapView />
-            </Route>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/">
-              <div>
+    <SessionProvider>
+      <BrowserRouter>
+        <div className="App">
+          <LoggedOut>
+            <Switch>
+              <Route exact path="/login">
+                <LogIn />
+              </Route>
+              <Route exact path="/radmin">
+                <RAdmin />
+                <Link to="/" >Volver</Link>
+              </Route>
+              <Route exact path="/administrar">
+                <Admin method={ListarUsuarios} />
+                <Link to="/" >Volver</Link>
+              </Route>
+              <Route exact path="/*">
+                <LogIn />
+              </Route>
+            </Switch>
+          </LoggedOut>
+          <LoggedIn>
+            <header>
+              <MNavBar />
+            </header>
+            <div style={{ height: "60px" }}>
+            </div>
+            <Switch>
+              <Route exact path="/login">
+                <LogIn />
+              </Route>
+              <Route exact path="/perfil">
+                <Profile />
+              </Route>
+              <Route exact path="/amigos">
+                <Friends />
+              </Route>
+              <Route exact path="/mapa">
                 <MapView />
-              </div>
-            </Route>
-          </Switch>
-        </LoggedIn>
-      </div>
-    </BrowserRouter>
-
+              </Route>
+              <Route exact path="/about">
+                <About />
+              </Route>
+              <Route exact path="/">
+                <div>
+                  <MapView />
+                </div>
+              </Route>
+            </Switch>
+          </LoggedIn>
+        </div>
+      </BrowserRouter>
+    </SessionProvider>
   )
 }
 

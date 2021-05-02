@@ -1,0 +1,10 @@
+{
+  "simulation": "uniovi.FirstSimulation",
+  "simulationId": "firstsimulation",
+  "start": 1619979719353,
+  "description": "",
+  "scenarios": ["FirstSimulation"],
+  "assertions": [
+
+  ]
+}
