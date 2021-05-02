@@ -8,11 +8,6 @@ class GatewaysFactory {
     static forUser() {
         return new UserGateway();
     }
-
-    static forFriendRequest() {
-        // return new FriendRequestGateway();
-        return null;
-    }
 }
 
 export default GatewaysFactory;
