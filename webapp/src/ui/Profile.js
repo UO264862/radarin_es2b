@@ -13,6 +13,8 @@ import {
   Typography,
   IconButton,
 } from "@material-ui/core";
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 import { modificarNombreUsuario, getUsernameByWebId } from "../api/api";
 import EditIcon from "@material-ui/icons/Edit";
@@ -127,6 +129,10 @@ const Perfil = () => {
                     webId,
                     document.getElementById("input").value
                   );
+                  toast.warning("Tu perfil ha sido modificado", {
+                    position: toast.POSITION.BOTTOM_CENTER,
+                    autoClose: 5000
+                })
                   setBorder("0px solid");
                   setDisabled();
                 } else {
@@ -146,6 +152,7 @@ const Perfil = () => {
           <hr />
         </Card>
       </CombinedDataProvider>
+      <ToastContainer />
     </Container>
   );
 };
