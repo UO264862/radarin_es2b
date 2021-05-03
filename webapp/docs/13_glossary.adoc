@@ -37,7 +37,7 @@
  *POD* |
 	Almacenamiento descentralizado qhue se usa en aplicaciones Solid que permite al usuario conservar el control y la propiedad de sus datos. |
  *RadarIn* |
-	Conjunto de aplicación y aplicacion móvil|
+	Conjunto de aplicación y aplicacion móvil. |
  *React* |
 	Framework de JavaScript que nos da la posibilidad de crear interfaces de usuario de una manera fácil e intuitiva. |
  *SoLiD* |
