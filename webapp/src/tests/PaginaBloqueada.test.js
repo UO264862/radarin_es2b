@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent, getByText } from "@testing-library/react";
-import PaginaBloqueada from "./PaginaBloqueada";
+import PaginaBloqueada from "../ui/PaginaBloqueada";
 
 test('Comprobar que todo se renderiza correctamente', async () => {
     const { getByText } = render(<PaginaBloqueada/>);

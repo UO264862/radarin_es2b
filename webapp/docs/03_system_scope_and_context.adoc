@@ -11,7 +11,7 @@
 RadarIn es una aplicación donde el usuario registrado, a través de la aplicación móvil, podrá ver a sus amigos mas cercanos en un mapa.
 El usuario registrado podrá gestionar a sus amigos y recibir notificaiones al móvil en caso de que haya algun amigo cerca.
 
-image:bussines.png["bussines context diagram"]
+// image:bussines.png["bussines context diagram"]
 
 [plantuml, system_scope_and_context1, svg]
 ----
@@ -55,7 +55,7 @@ database "SoLiD" {
    [POD de Usuario]
 }
 
-[Aplicación] <-> [POD de Usuario] : "Compartir localización"
+[Aplicación] <-> [POD de Usuario] : "Compartir amistades"
 ----
 
 [.text-right]
@@ -73,7 +73,7 @@ database "MongoDB" {
 }
 
 [Aplicación] <-> [Base de datos de RadarIn] : "Compartir peticiones de amistad"
-[Aplicación] <-> [Base de datos de RadarIn] : "Compartir amistades"
+[Aplicación] <-> [Base de datos de RadarIn] : "Compartir localización"
 [Aplicación] <-> [Base de datos de RadarIn] : "Compartir nombres de usuario"
 ----
 
@@ -96,9 +96,9 @@ Figura 3.3. Contexto de negocio del sistema (Parte 3: Base de datos interna).
  *Enviar localización* |
     La aplicación, de forma frecuente, pedirá la localización del usuario registrado. |
  *Proyectar los amigos cercanos* |
-    La aplicación accederá a los POD de sus amigos y si estan cerca del usuario registrado le pasará la localización a la API de OpenStreetMap que pintará las localización es en el mapa. |
- *Comparatir localización* |
-    La aplicación accederá al POD, tanto del usuario registrado como de sus amigos, para obtener o guardar la localización y compararlas entre ellas. |
+    La aplicación accederá a los POD para ver quiénes son los amigos del usuario, y junto a la base de datos MongoDB imprimirá en el mapa la localización a través de la API de OpenStreetMap. |
+ *Compartir localización* |
+    La aplicación accederá a base de datos para obtener o guardar la localización de cada usuario. |
  *Gestión de usuarios* |
     El administrador podrá gestionar los usuarios registrados. |
  *Monotorización del servidor* |
@@ -107,8 +107,7 @@ Figura 3.3. Contexto de negocio del sistema (Parte 3: Base de datos interna).
 
 === Contexto técnico
 
-RadarIn es una aplicación descentralizada. Para lograrlo todos los datos se almacenan en los POD de los usuarios.
-Sus localizaciones se enviarán a través de de la aplicación utilizando las URL de SoLiD POD, lo que requiere una conexión a Internet.
+RadarIn es una aplicación descentralizada. Para lograrlo la mayoría de los datos se almacenan en los POD, pero por temas de eficiencia se guardarán en la base de datos las localizaciones y las peticiones de amistad.
 
 image:technical.png["technical context diagram"]
 
@@ -127,6 +126,12 @@ database "SoLiD" {
 
 [Aplicación] <-> [POD de Usuario1] : Fetch HTTPS
 [Aplicación] <-> [POD de Usuario2] : Fetch HTTPS
+
+database "MongoDB" {
+   [Base de datos interna]
+}
+
+[Aplicación] <-> [Base de datos interna] : Fetch HTTPS
 
 [Aplicación móvil 1] <-> [Aplicación] : HTTPS
 [Aplicación móvil 2] <-> [Aplicación] : HTTPS
@@ -168,7 +173,9 @@ Figura 3.5. Contexto técnico del sistema (Parte 2).
  *Aplicación* |
     La aplicación donde se trbajará y se procesará las localizaciones. |
  *POD of USER(1/2)* |
-    Almacenamiento individual donde se guardará la información de cada usuario registrado. |
+    Almacenamiento de donde se obtiene la información de los amigos y la información del perfil del usuario. |
  *SoLiD* |
     Un proyecto donde se busca que el usuario registrado tenga control sobre sus datos mejorando la privacidad. |
+ *Base de datos MongoDB* |
+    Almacenamiento utilizado para almacenar las localizaciones y las peticiones de amistad. |
 |===

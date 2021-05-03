@@ -1,6 +1,6 @@
 import React from 'react'
-import { render, fireEvent, getByText } from "@testing-library/react";
-import About from "./About";
+import { render} from "@testing-library/react";
+import About from "../ui/About";
 
 test('Comprobar que todo se renderiza correctamente', async () => {
     const { getByText } = render(<About/>);

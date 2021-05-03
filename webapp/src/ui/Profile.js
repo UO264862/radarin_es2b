@@ -75,7 +75,7 @@ const Perfil = () => {
               <span className="perfil-span">Nombre de Usuario:</span>
               <br />
               <div>
-                <input disabled style={{ border: isBorder }} className = "inputEdit" id="input" type="text" placeholder={nombre}></input>
+                <input disabled style={{ border: isBorder }} autosave className = "inputEdit" id="input" type="text" placeholder={nombre}></input>
               </div>
             </Typography>
             <hr />
@@ -129,7 +129,7 @@ const Perfil = () => {
                     webId,
                     document.getElementById("input").value
                   );
-                  toast.warning("Tu perfil ha sido modificado", {
+                  toast.info("Tu perfil ha sido modificado", {
                     position: toast.POSITION.BOTTOM_CENTER,
                     autoClose: 5000
                 })

@@ -1,6 +1,6 @@
 import React from 'react'
-import { render, fireEvent, getByText } from "@testing-library/react";
-import MNavBar from "./MNavBar";
+import { render} from "@testing-library/react";
+import MNavBar from "../ui/MNavBar";
 import { BrowserRouter } from 'react-router-dom';
 
 test('Comprobar que todo se renderiza correctamente', async () => {

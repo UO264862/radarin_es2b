@@ -24,8 +24,8 @@ class CurrentUserService {
     getDefaultUser() {
         // Get coordinates from navigator
         let position = this.currentUserFactory.forGetCurrentUserCoords();
-        if(position==null){
-            position={lat:0,lng:0};
+        if (position == null) {
+            position = { lat: 0, lng: 0 };
         }
         return new UserDTO({ username: "Tú", latitude: parseFloat(position.lat), longitude: parseFloat(position.lng) });
     }
@@ -35,8 +35,12 @@ class CurrentUserService {
         var lista = [];
         for (const webidAmigo of amigos) {
             var amigo = await getUsuarioByWebId(webidAmigo);
-            var coordenadas = amigo.coordinates.split(",");
-            lista.push(new UserDTO({ username: amigo.nombreUsuario, latitude: coordenadas[0], longitude: coordenadas[1] }))
+            console.log(amigo)
+            if (!amigo.error && amigo.coordinates!=="") {
+                var coordenadas = amigo.coordinates.split(",");
+                lista.push(new UserDTO({ username: amigo.nombreUsuario, latitude: coordenadas[0], longitude: coordenadas[1] }))
+
+            }
         }
         return lista;
     }

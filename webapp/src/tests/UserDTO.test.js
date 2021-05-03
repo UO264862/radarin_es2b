@@ -1,4 +1,4 @@
-import { UserDTO } from "../src/domain/UserDTO";
+import { UserDTO } from "../domain/UserDTO";
 import "@testing-library/jest-dom/extend-expect";
 import { latLng } from 'leaflet';
 

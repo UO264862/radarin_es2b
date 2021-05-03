@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
-import Admin, { ListaUsuarios, Usuario } from "./Admin";
+import Admin, { ListaUsuarios, Usuario } from "../ui/Admin";
 import "@testing-library/jest-dom/extend-expect";
 import {jest} from "@jest/globals";
 
