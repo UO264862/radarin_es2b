@@ -308,7 +308,6 @@ class FriendsService {
     }
     return lista;
   }
-
 }
 
 export default FriendsService;
