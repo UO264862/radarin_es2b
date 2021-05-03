@@ -76,7 +76,6 @@ export async function listarDistancias(webId) {
 export const ListaAmigos = ({ distanciasOpcionales }) => {
   if (distanciasOpcionales)
     distanciasAmigos = distanciasOpcionales
-  const webId = useWebId();
   var listItems;
   if (distanciasAmigos) {
     listItems = distanciasAmigos.map((friend) =>
