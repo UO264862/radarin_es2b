@@ -10,3 +10,4 @@ image:12_tests.PNG["Pruebas de aceptación"]
 * Pruebas de carga: son pruebas que permiten probar con cargas de usuarios concurrentes. Se pueden llevar a cabo con scripts propios o con herramientas de terceros, opción por la que hemos optado, haciendo uso de la herramienta Gatling, escrita en scala.
 
 image:12_tests_carga.PNG["Pruebas de carga"]
+
