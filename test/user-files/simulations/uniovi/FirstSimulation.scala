@@ -38,7 +38,7 @@ class FirstSimulation extends Simulation {
 			.post("/login/password")
 			.headers(headers_2)
 			.formParam("username", "uo269763")
-			.formParam("password", "PITINgallina0")
+			.formParam("password", "1234")
 			.formParam("response_type", "id_token token")
 			.formParam("display", "")
 			.formParam("scope", "openid")
