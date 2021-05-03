@@ -4,19 +4,19 @@
 [options = "header", cols = "1,2,2"]
 |===
  Decisión | Ventajas | Desventajas |
- Documentación en español |
+ *Documentación en español* |
     Mayor velocidad a la hora de crear la documentación y mayor calidad y riqueza del lenguaje. |
         No es el idioma mas usado en proyectos. |
- Uso de _OpenStreetMap_ |
+ *Uso de _OpenStreetMap_* |
     Parte del grupo ya esta familiarizado con él y nos parece más fácil de usar. |
         Al no ser el más utilizado quizá haya problemas a la hora de buscar información o en caso de tener algun error poco común. |
- _React_ |
+ *_React_* |
     Es una libreria que nos puede ayudar a usar la tecnología SOLID en nuetsro proyecto. |
         No estamos acostumbrado a trabajar con ellos y quizá al principio nos lleve más tiempo. |
- Base de datos |
+ *Base de datos* |
     Nos proporciona mayor velocidad que usando Pod's, además de una buena concurrecia. También estamos más familizarizados con ellas.  |
         Puede crecer mucho y puede perder fluidez. |
- Aplicación web |
+ *Aplicación web* |
     Portabilidad, vale para cualquier dispositivo. |
         Dificultad a la hora de mandar noficaciones. |
 |===

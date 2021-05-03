@@ -6,7 +6,9 @@
 . El usuario interacciona con la interfaz y abre la pantalla para registrarse.
 . Introduce los datos y solicita el inicio de sesión, si todo es correcto entra, si no deberá introducir de nuevo los datos.
 
-[plantuml, {plantUMLDir}iniciarSesion, svg]
+Destacar que en la versión móvil este _pop-up_ funciona como una vista independiente, aunque por debajo sea un _pop-up_.
+
+[plantuml, runtime-view1, svg]
 ----
 @startuml
 actor Usuario
@@ -14,37 +16,38 @@ participant Interfaz_Grafica
 participant Pop_Up_Login
 database Base_De_Datos
 database Pod
-Usuario -> Interfaz_Grafica: Login
-Interfaz_Grafica -> Pop_Up_Login: Abrir PopUp
-Usuario -> Pop_Up_Login: Introducir datos para iniciar sesión
+Usuario -> Interfaz_Grafica: LogIn
+Interfaz_Grafica -> Pop_Up_Login: "Abrir PopUp"
+Usuario -> Pop_Up_Login: "Introducir datos para iniciar sesión"
 
-Pop_Up_Login -> Pod: Solicitud inicio de sesión
+Pop_Up_Login -> Pod: "Solicitud inicio de sesión"
 
-Pod -> Pop_Up_Login: Inicio de sesion incorrecto
-Pod -> Interfaz_Grafica: Inicio de sesion correcto
+Pod -> Pop_Up_Login: "Inicio de sesion incorrecto"
+Pod -> Interfaz_Grafica: "Inicio de sesion correcto"
 
-Interfaz_Grafica-> Base_De_Datos: Comprueba si el usuario esta en base y si no lo añade
+Interfaz_Grafica-> Base_De_Datos: "Comprueba si el usuario esta en base y si no lo añade"
 @enduml
 ----
+
+[.text-right]
+Figura 6.1. Perspectiva en tiempo de ejecución. (Inicio de sesión)
 
 === Añadir un amigo
 
 . El usuario introduce el nombre de usuario del amigo.
 . Lo añade a su POD y devuelve todos sus amigos.
 
-[plantuml, {plantUMLDir}añadirAmigos, svg]
+[plantuml, runtime-view2, svg]
 ----
 @startuml
 actor Usuario
 participant Interfaz_Grafica
-participant Pop_Up_AddFriends
 database Base_De_Datos
 database Pod
 database PodAmigo
 Usuario -> Interfaz_Grafica: Añadir amigo
-Interfaz_Grafica -> Pop_Up_AddFriends: Abrir PopUp
-Usuario -> Pop_Up_AddFriends: Introducir nombre de usuario de tu amigo
-Pop_Up_AddFriends -> Base_De_Datos: Buscas el webid del amigo 
+Usuario  -> Interfaz_Grafica: Introducir nombre de usuario de tu amigo
+Interfaz_Grafica -> Base_De_Datos: Buscas el webid del amigo 
 Base_De_Datos-> Pod : Preparar solicitud con el nombre de usuario
 
 Pod -> PodAmigo: Solicitud de amistad
@@ -55,35 +58,41 @@ Interfaz_Grafica -> Interfaz_Grafica: Muestra los amigos
 @enduml
 ----
 
+[.text-right]
+Figura 6.2. Perspectiva en tiempo de ejecución. (Añadir un amigo)
 
 === Eliminar un amigo
 
 . El usuario introduce el nombre del amigo que quiere eliminar.
 . Eliminar el amigo de su POD y se muestran sus amigos actuales.
 
-[plantuml, {plantUMLDir}eliminarAmigos, svg]
+[plantuml, runtime_view3, svg]
 ----
+@startuml
 actor Usuario
 participant Interfaz_Grafica
-participant Pop_Up_DeleteFriend
 database Pod
 Usuario -> Interfaz_Grafica: Eliminar amigo
-Interfaz_Grafica -> Pop_Up_DeleteFriend: Abrir PopUp
-Usuario -> Pop_Up_DeleteFriend: Introducir nombre de usuario de tu amigo
+Usuario -> Interfaz_Grafica: Introducir nombre de usuario de tu amigo
 
-Pop_Up_DeleteFriend -> Pod: Solicitud de eliminar amigo
+Interfaz_Grafica -> Pod: Solicitud de eliminar amigo
 Pod->Pod: Eliminar amigo
 Pod-> Interfaz_Grafica: Devuelve los amigos
 Interfaz_Grafica -> Interfaz_Grafica: Muestra los amigos
+@enduml
 ----
+
+[.text-right]
+Figura 6.3. Perspectiva en tiempo de ejecución. (Eliminar un amigo)
 
 === Ver amigos
 
 . El usuario solicita ver todos sus amigos.
 . Se accede al POD y devuelve todos los amigos que tiene.
 
-[plantuml, {plantUMLDir}verAmigos, svg]
+[plantuml, runtime_view4, svg]
 ----
+@startuml
 actor Usuario
 participant Interfaz_Grafica
 database Pod
@@ -91,14 +100,18 @@ Usuario -> Interfaz_Grafica: Ver amigos
 Interfaz_Grafica -> Pod: Solicitud mostrar amigos
 Pod -> Interfaz_Grafica: Devuelve los amigos
 Interfaz_Grafica -> Interfaz_Grafica: Muestra los amigos
+@enduml
 ----
+
+[.text-right]
+Figura 6.4. Perspectiva en tiempo de ejecución. (Ver amigos)
 
 === Ver amigos en el mapa
 
 . El usuario al estár en el mapa verá una marca donde esten sus amigos
 . Cada cierto tiempo se actualizara su posición y la de sus amigos
 
-[plantuml, {plantUMLDir}verAmigosMapa, svg]
+[plantuml, runtime_view5, svg]
 ----
 @startuml
 actor Usuario
@@ -116,25 +129,116 @@ Interfaz_Grafica -> Interfaz_Grafica: Muestra con los datos al usuario y a sus a
 @enduml
 ----
 
+[.text-right]
+Figura 6.5. Perspectiva en tiempo de ejecución. (Ver amigos en el mapa)
+
 === Notificaciones
 
 . El usuario activa la ubicación y permite usarlo a la aplicación.
 . Se comprueba que haya amigos cerca.
 . En el caso de haberlos el usuario recibe una notificación.
 
-[plantuml, {plantUMLDir}notificaciones, svg]
+[plantuml, runtime_view6, svg]
 ----
+@startuml
 actor Usuario
-participant Aplicacion
+participant Interfaz_Grafica
 database Pod
 database PodAmigo
-Usuario -> Aplicacion:Activa localizacion
-Aplicacion -> Pod: Solicita ubicaciones amigos cercanos
+Usuario -> Interfaz_Grafica:Activa localizacion
+Interfaz_Grafica-> Pod: Solicita ubicaciones amigos cercanos
 Pod->PodAmigo:Solicita ubicación
 Pod<-PodAmigo:Devuelve ubicación
-Pod -> Aplicacion: Devuelve ubicaciones cercanas
-Aplicacion -> Usuario: Notificacion, amigo cerca
+Pod -> Interfaz_Grafica: Devuelve ubicaciones cercanas
+Interfaz_Grafica-> Interfaz_Grafica: Notificacion, amigo cerca
+@enduml
 ----
+
+=== Ver Perfil
+
+. El usuario accede al perfil y ve su información.
+
+[plantuml, {plantUMLDir}verperfil, svg]
+----
+@startuml
+actor Usuario
+participant Interfaz_Grafica
+database Pod
+database Base_de_Datos
+Usuario -> Interfaz_Grafica: Accede al perfil
+Interfaz_Grafica-> Pod:Solicita los datos personales
+Interfaz_Grafica-> Base_de_Datos:Solicita el nombre de usuario
+Interfaz_Grafica<- Pod: Devuelve los datos solicitados
+Interfaz_Grafica<- Base_de_Datos:Devuelve el nombre de usuario
+@enduml
+----
+
+=== Modificar Perfil
+
+. Si lo desea puede cambiar sus datos personales.
+
+[plantuml, {plantUMLDir}modificarperfil, svg]
+----
+@startuml
+actor Usuario
+participant Interfaz_Grafica
+database Pod
+database Base_De_Datos
+Usuario -> Interfaz_Grafica: Accede al perfil
+Usuario -> Interfaz_Grafica: Introduce el nuevo nombre de usuario
+Interfaz_Grafica-> Base_De_Datos:Comprueba que no existe el nombre y si es así lo cambia
+Interfaz_Grafica<- Base_De_Datos:Devuelve el nuevo nombre en caso de éxito
+Interfaz_Grafica<- Base_De_Datos:Si ya existe le notifica al usuario
+Interfaz_Grafica-> Pod:Introduce los nuevos datos personales
+Interfaz_Grafica<- Pod: Devuelve los nuevos datos personales
+@enduml
+----
+
+=== Administrar
+
+. El administrador puede acceder a una zona donde gestionar .
+. Necesita una contraseña para entrar.
+. Una vez dentro podrá bloquear y desbloquear a los usuarios.
+
+[plantuml, {plantUMLDir}admnistrar, svg]
+----
+@startuml
+actor Usuario
+participant Interfaz_Grafica
+database Base_De_Datos
+Usuario -> Interfaz_Grafica:Accede al registro de admin
+Usuario -> Interfaz_Grafica:Introduce la contraseña y accede si es correcta
+Interfaz_Grafica-> Base_De_Datos: Gestiona a los usuarios, bloqueandolos y desbloqueandolos
+@enduml
+
+----
+
+=== Usuario Bloqueado
+
+. Un usuario bloqueado no puede acceder a la aplicación
+
+[plantuml, {plantUMLDir}usuariobloqueado, svg]
+----
+@startuml
+actor Usuario
+participant Interfaz_Grafica
+participant Pop_Up_Login
+database Pod
+database Base_De_Datos
+Usuario -> Interfaz_Grafica: Login
+Interfaz_Grafica -> Pop_Up_Login: Abrir PopUp
+Usuario -> Pop_Up_Login: Introducir datos para iniciar sesión
+Pop_Up_Login -> Pod: Solicitud inicio de sesión
+Pod -> Interfaz_Grafica: Inicio de sesion correcto
+
+Interfaz_Grafica-> Base_De_Datos: Comprueba si el usuario esta bloqueado o no
+Interfaz_Grafica<- Base_De_Datos: Si esta bloqueado, le notifica y le desconecta
+Interfaz_Grafica<- Interfaz_Grafica: Hace logout y le redirige a login
+@enduml
+----
+
+[.text-right]
+Figura 6.6. Perspectiva en tiempo de ejecución. (Notificaciones)
 
 === Leyenda
 
@@ -144,7 +248,7 @@ Aplicacion -> Usuario: Notificacion, amigo cerca
  image:leyendaUsuario.PNG["UML"] |
     Usuario que interactúa con la aplicación. |
  image:leyendabase.PNG["UML"] |
-    POD de SoLiD (La base de datos personal) |
+    Almacenamiento de datos (POd de SoLiD o base de datos interna) |
  image:leyendaparticipante.PNG["UML"] |
     Modulo del sistema |
 |===

@@ -3,44 +3,55 @@
 == Perspectiva de despliegue
 
 .Contexto
-RadarIn, nuestra aplicación, está orientada a usuarios personales y será desplegada en navegador, tanto en ordenadores personales como en dispositivos móviles.
+RadarIn, nuestra aplicación, está orientada a usuarios personales y será desplegada en navegador, aunque esta sea distribuida principalmente en dispositivos móviles.
 Concretamente, serán Microsoft Edge y Google Chrome los dos navegadores de referencia, ambos basados en https://www.chromium.org/[Chromium].
 
 .Tecnologías
 Los datos del usuario serán almacenados en un https://solidproject.org/users/get-a-pod[POD], siguiendo así las especificaciones del proyecto https://solidproject.org/[SoLiD].
-Toda característica de la aplicación dependerá de su homóloga en la plataforma https://www.heroku.com/[Heroku], donde hemos decidido que sea desplegada.
+Toda característica de la aplicación dependerá de su homóloga en la plataforma https://www.heroku.com/[Heroku], donde hemos decidido que sea desplegada. El entorno de desarrollo
+con el cual hemos trabajado es https://nodejs.org/es/[Node.js]. Además nos hemos apoyado en una base de datos de https://www.mongodb.com/2[MongoDB] para guardar cierta información 
+y así mejorar la velocidad y poder realizar una serie de operaciones con esos datos.
 
 === Infraestructura
 
-Siguiendo el patrón de diseño de software Modelo-Vista-Controlador, la responsabilidad de manejar las peticiones recibidas desde el usuario será delegada por la vista 
-correspondiente a un controlador idealmente común a todas las vistas. No obstante, el usuario exclusivamente podrá mandar peticiones contra su vista correspondiente.
+Siguiendo el patrón de diseño de n capas, hemos distribuido el código en tres capas:
 
-El controlador de la aplicación únicamente accederá al POD del usuario, el cual hará las veces de modelo, con previo consentimiento de dicha persona.
-
-Una arquitectura de una aplicación basada en el patrón Modelo-Vista-Controlador que siga las especificaciones de SoLiD sugiere un desacoplamiento del modelo.
-Dependeremos de la plataforma que mantenga el POD en cuestiones como la disponibilidad de los datos, aunque esto ofrece una garantía al usuario de que absolutamente 
-ningún dato será guardado en la aplicación RadarIn, dando la confianza de que éstos no serán manipulados de ninguna manera que el usuario no permita explícitamente.
+* *Capa de interfaz de usuario*. Hemos desarrollado la interfaz de usuario como un conjunto de componentes de React.
+* *Capa de lógica de negocio*. Para el desarrollo de las operaciones comunes en la aplicación.
+* *Capa de persistencia*. Se encuentra alojada en una API REST desplegada con MongoDB.
 
 .Sistemas implicados en la infraestructura.
-- **Dispositivo de usuario**. Puede ser un dispositivo móvil o un equipo de sobremesa.
-- **Heroku**. Sirve de plataforma a la aplicación RadarIn.
-- **POD de SoLiD**. Almacena la información del usuario en un servidor de terceros, cuyo almacenamiento tiene que haber sido llevado a cabo por el usuario previamente.
+- *Dispositivos de usuario*. Un dispositivo móvil.
+- *Dispositivo de administrador*. Puede ser un dispositivo móvil o un dispositivo de sobremesa.
+- *Heroku*. Sirve de plataforma a la aplicación RadarIn.
+- *POD de SoLiD*. Almacena la información del usuario en un servidor de terceros, cuyo almacenamiento tiene que haber sido llevado a cabo por el usuario previamente.
 
-[plantuml, {plantUMLDir}infrastructure1, svg]
+[plantuml, deployment_view1, svg]
 ----
-database "POD on SoLiD" {
-  [Ubication]
+database "SoLiD" {
+  [POD de Usuario]
 }
 
-node "RadarIn Application on heroku" {
-  [View]
-  [Controller]
+node "RadarIn (Heroku)" {
+  package "WebApp" {
+    [View] <-> [Service]
+    [Service] <-> [API WebApp]
+  }
+  package "RestApi" {
+    [API RestApi]
+  }
+  [API WebApp] <-> [API RestApi]
+  database "MongoDB" {
+    [Ubicaciones]
+    [Peticiones de amistad]
+  }
+  [API RestApi] <-> [Ubicaciones]
+  [API RestApi] <-> [Peticiones de amistad]
 }
 
-User  --> [View]
-
-[View] --> [Controller] : notify
-[Controller] --> [View] : update
-
-[Controller] --> [Ubication]
+Usuario  <-> [View]
+[Service] <-> [POD de Usuario]
 ----
+
+[.text-right]
+Figura 7.1. Perspectiva de despliegue.
