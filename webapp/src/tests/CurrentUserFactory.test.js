@@ -1,7 +1,7 @@
-import CurrentUserFactory from "./CurrentUserFactory";
-import GetCurrentUserCoords from "./strategies/GetCurrentUserCoords";
-import GetUsernameByWebId from "./strategies/GetUsernameByWebId";
-import UpdateCurrentUserCoordinates from "./strategies/UpdateCurrentUserCoordinates";
+import CurrentUserFactory from "../domain/currentUser/CurrentUserFactory";
+import GetCurrentUserCoords from "../domain/currentUser/strategies/GetCurrentUserCoords";
+import GetUsernameByWebId from "../domain/currentUser/strategies/GetUsernameByWebId";
+import UpdateCurrentUserCoordinates from "../domain/currentUser/strategies/UpdateCurrentUserCoordinates";
 
 test("Comprobar que la factoria funciona correctamente", async () => {
     expect(new CurrentUserFactory().forGetCurrentUserCoords()).toStrictEqual((new GetCurrentUserCoords()).execute());

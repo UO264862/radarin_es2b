@@ -1,4 +1,4 @@
-import UpdateCurrentUserCoordinates from "./UpdateCurrentUserCoordinates";
+import UpdateCurrentUserCoordinates from "../domain/currentUser/strategies/UpdateCurrentUserCoordinates";
 
 test("Comprobar que funciona correctamente", async () => {
     var upd=new UpdateCurrentUserCoordinates("webid","2,2");

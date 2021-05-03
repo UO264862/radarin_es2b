@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent} from "@testing-library/react";
-import RAdmin from "./RAdmin";
+import RAdmin from "../ui/RAdmin";
 
 test('Comprobar que todo se renderiza correctamente', async () => {
     const { getByText } = render(<RAdmin/>);

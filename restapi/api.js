@@ -100,7 +100,6 @@ router.post("/usuario/modificar/nombre", async (req, res) => {
     if (usuario)
         res.send({ error: "Error: Este nombre de usuario ya existe" });
     else {
-        console.log(nombreUsuario)
         let usuario = await Usuarios.findOneAndUpdate(
             {
                 webid: webid

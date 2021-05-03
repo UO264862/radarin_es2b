@@ -1,7 +1,7 @@
-import './LogIn.css';
+import "./styles/LogIn.css";
 import React from 'react';
 import {Grid } from '@material-ui/core'
-import LoginButton from "./LoginButtons"
+import LoginButton from "./modules/LoginButtons"
 import { Link} from 'react-router-dom';
 function LogIn(props) {
     return (
@@ -14,6 +14,7 @@ function LogIn(props) {
             </Grid>
             <Link to="/radmin" >Accede como administrador</Link>
         </div>
+        
         </div>
     )
 }

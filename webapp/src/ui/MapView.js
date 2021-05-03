@@ -1,13 +1,13 @@
 // External dependences
 import 'leaflet/dist/leaflet.css';
-import {  useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 
 // Dependences from: ~/ui/map
-import './map.css';
-import { getMarkers, calcularDistancia } from './Markers';
+import './styles/map.css';
+import { getMarkers, calcularDistancia } from './modules/Markers';
 
 
 // Import dependences
@@ -20,67 +20,71 @@ import { getMapBoxAccessToken, getAttributionMessage } from '../util/CommonDataC
 // Domain dependences
 import ServicesFactory from '../domain/ServicesFactory';
 
-import{useWebId } from "@solid/react";
+import { useWebId } from "@solid/react";
 
 // Functional React Component using React Hooks
 // https://es.reactjs.org/docs/components-and-props.html
 function MapView(props) {
-    
-    const webId=useWebId();
-    
-    if(webId!==undefined){
-        addUsuario(webId).then(async function(){
-            let estado=await getEstadoCuentaUsuario(webId);
-            if (estado.estado==="BLOQUEADA"){
-                var a=document.getElementsByTagName("button");
-                a[1].click();
-                window.location.href =window.location.origin+"/error";
-            }
-        });   
+
+    const webId = useWebId();
+
+    const initial = () => {
+        if (webId !== undefined) {
+            addUsuario(webId).then(async function () {
+                let estado = await getEstadoCuentaUsuario(webId);
+                if (estado.estado === "BLOQUEADA") {
+                    var a = document.getElementsByTagName("button");
+                    toast.warning("Tu cuenta ha sido bloqueada", {
+                        position: toast.POSITION.BOTTOM_CENTER,
+                        autoClose: 5000,
+                        onClose: () => a[1].click()
+                    })
+                }
+            });
+        }
     }
     const [state, setState] = useState({
         user: ServicesFactory.forCurrentUser().getDefaultUser(),
         friends: null,
-        near:false
+        near: false
     });
-    
+
     const refreshState = async () => {
-        let amigosCerca=false;
+        let amigosCerca = false;
         let username = (await getUsernameByWebId(webId)).nombreUsuario;
         let distancia;
         let receivedUser = await ServicesFactory.forCurrentUser().getLoggedUser(username);
-        let amigos=await ServicesFactory.forCurrentUser().getFriends(webId);
-        let numeroDeAmigosTotal=amigos.length;
-        let numeroDeAmigo=0;
-        for(const amigo of amigos){
+        let amigos = await ServicesFactory.forCurrentUser().getFriends(webId);
+        let numeroDeAmigosTotal = amigos.length;
+        let numeroDeAmigo = 0;
+        for (const amigo of amigos) {
             numeroDeAmigo++;
-            distancia=await calcularDistancia(receivedUser.latitude,receivedUser.longitude,amigo.latitude,amigo.longitude); 
-            if(distancia<=300){
-                amigosCerca=true
+            distancia = await calcularDistancia(receivedUser.latitude, receivedUser.longitude, amigo.latitude, amigo.longitude);
+            if (distancia <= 300) {
+                amigosCerca = true
                 break;
             }
-            if(numeroDeAmigo===numeroDeAmigosTotal){
-                amigosCerca=false
+            if (numeroDeAmigo === numeroDeAmigosTotal) {
+                amigosCerca = false
             }
         }
-        if(amigosCerca && state.near===false){
+        if (amigosCerca && state.near === false) {
             toast.info("Tienes amigos cerca", {
                 position: toast.POSITION.BOTTOM_LEFT,
                 autoClose: 5000
-              });
+            });
         }
-        if (receivedUser != null){
-            setState({ user: receivedUser, friends:amigos ,near:amigosCerca});
-            await modificarCoordenadas(webId,receivedUser.latitude+","+receivedUser.longitude);
+        if (receivedUser != null) {
+            setState({ user: receivedUser, friends: amigos, near: amigosCerca });
+            await modificarCoordenadas(webId, receivedUser.latitude + "," + receivedUser.longitude);
         }
     }
-    
-    useInterval(refreshState,10000);
-    
+    useEffect(initial)
+    useInterval(refreshState, 10000);
+
     let users = [state.user];
     Array.prototype.push.apply(users, state.friends);
     let usersMarkers = getMarkers(users);
-
     return (
         <MapContainer center={state.user.getLatLng()} zoom={parseFloat(17)} >
             <TileLayer

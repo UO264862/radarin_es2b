@@ -13,11 +13,13 @@ import {
   Typography,
   IconButton,
 } from "@material-ui/core";
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 import { modificarNombreUsuario, getUsernameByWebId } from "../api/api";
 import EditIcon from "@material-ui/icons/Edit";
 import { FOAF, VCARD } from "@inrupt/lit-generated-vocab-common";
-import "./profile.css";
+import "./styles/profile.css";
 import { useWebId } from "@solid/react";
 
 const Perfil = () => {
@@ -127,6 +129,10 @@ const Perfil = () => {
                     webId,
                     document.getElementById("input").value
                   );
+                  toast.info("Tu perfil ha sido modificado", {
+                    position: toast.POSITION.BOTTOM_CENTER,
+                    autoClose: 5000
+                })
                   setBorder("0px solid");
                   setDisabled();
                 } else {
@@ -146,6 +152,7 @@ const Perfil = () => {
           <hr />
         </Card>
       </CombinedDataProvider>
+      <ToastContainer />
     </Container>
   );
 };

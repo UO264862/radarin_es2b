@@ -1,6 +1,6 @@
 import React from "react"
 import { render, fireEvent} from "@testing-library/react";
-import { Friends, ListaPeticionesCompletadas, ListaPeticionesPendientes, PeticionCompletada, PeticionPendiente } from "./Friends";
+import { Friends, ListaPeticionesCompletadas, ListaPeticionesPendientes, PeticionCompletada, PeticionPendiente } from "../ui/Friends";
 import {jest} from "@jest/globals"
 
 test("Comprobar que todo se renderiza correctamente", async () => {

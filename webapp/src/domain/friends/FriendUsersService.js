@@ -9,6 +9,9 @@ import FC from "solid-file-client";
 import { toast } from "react-toastify";
 import FileClient from "solid-file-client";
 import { addFriendRequest, getWebIdByUsername, eliminarSolicitud, aceptarSolicitud, getSolicitudesCompletadas, getSolicitudesPendientes, getUsernameByWebId } from "../../api/api";
+import React from "react";
+import ReactDOM from 'react-dom';
+import {Friends} from '../../ui/Friends'
 
 
 
@@ -84,6 +87,14 @@ class FriendsService {
           autoClose: 5000
         });
       }
+    }
+    else{
+      //cambiamos la entrada de la tabla peticiones
+      aceptarSolicitud(webIdSolicitante, webIdSolicitado);
+      toast.info("Has aceptado correctamente la petición", {
+        position: toast.POSITION.BOTTOM_LEFT,
+        autoClose: 5000
+      });
     }
     this.reload();
   }
@@ -266,7 +277,10 @@ class FriendsService {
     return false;
   }
   reload = () => {
-    window.location.reload();
+    ReactDOM.render(
+          <Friends />,
+      document.getElementById('friends')
+    );
   };
 
   async getSession() {
@@ -285,13 +299,15 @@ class FriendsService {
   async obtenerAmigos() {
     var lista = new Array();
     if(await this.isWebIdValid(this.webid)){
-      for await (const friend of data[this.webid].friends) lista.push(friend.toString());
+      for await (const friend of data[this.webid].friends) {
+        if( await getUsernameByWebId(friend))
+          lista.push(friend.toString());
+      }
       const users = await Promise.all(lista);
       return users;
     }
     return lista;
   }
-
 }
 
 export default FriendsService;
