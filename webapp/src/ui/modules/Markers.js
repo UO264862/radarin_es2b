@@ -1,7 +1,8 @@
 // External dependences
 import { Marker, Popup } from 'react-leaflet';
-import { divIcon,latLng, CRS  } from 'leaflet';
-
+import { divIcon,latLng, CRS} from 'leaflet';
+import ServicesFactory from '../../domain/ServicesFactory';
+import { getUsernameByWebId } from "../../api/api"
 
 const blue = '#004B87';
 const yellow = '#FFCD00';
@@ -46,6 +47,19 @@ export function getMarkers(users) {
         colour = blue;
     });
     return usersMarkers;
+}
+
+export async function calcularDistancia2(webId) {
+    let user= await getUsernameByWebId(webId);
+    let receivedUser = await ServicesFactory.forCurrentUser().getLoggedUser(user.nombreUsuario);
+    let amigos = await ServicesFactory.forCurrentUser().getFriends(webId);
+    let amigosDistancia;
+    console.log(amigos)
+    for (const amigo of amigos) {
+        let distancia=calcularDistancia(receivedUser.latitude, receivedUser.longitude, amigo.latitude, amigo.longitude);
+        amigosDistancia.set(amigo.webid,distancia)
+    }
+    return amigosDistancia;
 }
 
 export function calcularDistancia(lat1, lng1, lat2, lng2) {

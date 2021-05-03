@@ -1,7 +1,7 @@
 // Dependences from: ~/ui/logIn/modules
 import React from "react";
 import { AuthButton } from "@solid/react";
-import './LogIn.css';
+import '../styles/LogIn.css';
 
 
 class LoginButton extends React.Component {

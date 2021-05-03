@@ -19,7 +19,7 @@ import { ToastContainer } from 'react-toastify';
 import { modificarNombreUsuario, getUsernameByWebId } from "../api/api";
 import EditIcon from "@material-ui/icons/Edit";
 import { FOAF, VCARD } from "@inrupt/lit-generated-vocab-common";
-import "./profile.css";
+import "./styles/profile.css";
 import { useWebId } from "@solid/react";
 
 const Perfil = () => {

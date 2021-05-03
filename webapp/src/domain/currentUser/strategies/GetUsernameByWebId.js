@@ -1,5 +1,4 @@
-// Persistence dependences
-import PersistenceFactory from '../../../persistence/PersistenceFactory';
+import { getUsernameByWebId } from "../../../api/api"
 
 class GetUsernameByWebId {
 
@@ -8,7 +7,7 @@ class GetUsernameByWebId {
     }
 
     async execute() {
-        return await PersistenceFactory.forUser().getUsername(this.webId);
+        return await getUsernameByWebId(this.webId);
     }
 }
 
