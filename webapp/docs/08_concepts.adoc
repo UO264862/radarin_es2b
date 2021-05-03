@@ -4,15 +4,13 @@
 === Conceptos del dominio
 
 .Los conceptios del dominio son los siguientes:
-- **Usuario**. Es la persona que usa la aplicación. El sistema almacenará su localización en un instante de tiempo, 
-no almacenará ningún tipo de información que no sea necesaria.
-- **Pod**. Es un repositorio de usuarios que almacenará la información que no se considera mínima del usuario, por ejemplo sus amigos. 
-Sigue las especificaciones SOLID y puede almacenarse en cualquier plataforma. Es el propio usuario el que tiene gestón total de su información.
-- **Amigo**. Un usuario tendrá amigos y le informará (mediante notificaciones) cuando uno de ellos esté cerca.
+- *Usuario*. Es la persona que usa la aplicación. El sistema almacenará su localización en un instante de tiempo, no almacenará ningún tipo de información que no sea necesaria.
+- *Administrador*. Es la persona que usa la aplicación. El sistema almacenará su localización en un instante de tiempo, no almacenará ningún tipo de información que no sea necesaria.
+- *Pod*. Es un repositorio de usuarios que almacenará la información que no se considera mínima del usuario, por ejemplo sus amigos. Sigue las especificaciones SoLiD y puede almacenarse en cualquier plataforma. Es el propio usuario el que tiene gestón total de su información.
+- *Amigo*. Un usuario tendrá amigos y le informará (mediante notificaciones) cuando uno de ellos esté cerca.
 
 === Patrones de arquitectura
-Basamos nuestra aplicación en el patrón arquitectónico MVC, consiste en separar los datos y la lógica de negocio de la aplicación de la 
-representación visual y los canales de comunicación. Este patrón de arquitectura de software se basa en las ideas de reutilización de código y la separación de conceptos, características que buscan facilitar la tarea de desarrollo de aplicaciones y su posterior mantenimiento.
+Basamos nuestra aplicación en el patrón n capas, consiste en separar los datos y la lógica de negocio de la aplicación de la representación visual y los canales de comunicación. Este patrón de arquitectura de software se basa en las ideas de reutilización de código y la separación de conceptos, características que buscan facilitar la tarea de desarrollo de aplicaciones y su posterior mantenimiento.
 
 === Experiencia de usuario
 ==== Diseño de la interfaz de usuario
@@ -22,25 +20,24 @@ La idea de la interfaz es hacerla intuitiva y dirigida para todos los tipos de u
 La idea primera del desarrollo de la aplicación es hacerla en español, ya que es nuestro idioma materno y nos sentimos más comodos para desarrollar la aplicación y la documentación.
 
 === Seguridad
-Se considera una aplicación segura gracias al uso del protocolo HTTPS. 
+Se considera una aplicación segura gracias al uso del protocolo https://es.wikipedia.org/wiki/Protocolo_seguro_de_transferencia_de_hipertexto[HTTPS]. 
 Además, gracias a los PODS los datos del usuario se almacenarán de una forma privada y es el propio usuario el que tiene que dar acceso a estos datos.
 
 === Desarrollo
 ==== Construcción
-Respecto a este apartado usaremos la libreria React.js para lograr los objetivos en cuanto a funcionalidad que deseamos.
-React es una biblioteca Javascript de código abierto diseñada para crear interfaces de usuario con el objetivo de facilitar el desarrollo de aplicaciones en una sola página. Es mantenido por Facebook y la comunidad de software libre. En el proyecto hay más de mil desarrolladores libres.
+Respecto a este apartado usaremos la libreria https://es.reactjs.org/[React] para lograr los objetivos en cuanto a funcionalidad que deseamos.
+https://es.reactjs.org/[React] es una biblioteca de JavaScript de código abierto diseñada para crear interfaces de usuario con el objetivo de facilitar el desarrollo de aplicaciones en una sola página. Es mantenido por Facebook y la comunidad de software libre. En el proyecto hay más de mil desarrolladores libres.
 
-React intenta ayudar a los desarrolladores a construir aplicaciones que usan datos que cambian todo el tiempo. Su objetivo es ser sencillo, declarativo y fácil de combinar. React sólo maneja la interfaz de usuario en una aplicación; React es la Vista en un contexto en el que se use el patrón MVC (Modelo-Vista-Controlador) o MVVM (Modelo-vista-modelo de vista). 
+Intenta ayudar a los desarrolladores a construir aplicaciones que usan datos que cambian todo el tiempo. Su objetivo es ser sencillo, declarativo y fácil de combinar. https://es.reactjs.org/[React] sólo maneja la interfaz de usuario en una aplicación; https://es.reactjs.org/[React] actuará como la capa más superior en un contexto en el que se use el patrón por capas.
 
 ==== APIs
-Usaremos una API de mapas (OpenStreetMap) para mostrar un mapa al usuario.
-OpenStreetMap tiene una API de edición para extraer y guardar geoinformación en crudo desde/hacia la base de datos de OpenStreetMap.
+Usaremos una API de mapas para mostrar un mapa al usuario. Usaremos https://wiki.openstreetmap.org/wiki/Main_Page[OpenStreetMap], una API de edición para extraer y guardar geoinformación en el mapa. En concreto, utilizaremos la librería https://leafletjs.com/[Leaflet] para realizar operaciones sobre el mapa.
 
 ==== Migración
 Habrá que desarrollar una aplicación Web y una para móviles, por tanto intentaremos no cambiar mucho en cuanto a desarrollo según se use una plataforma u otra.
 
 === Recuperación ante un imprevisto
-Gracias al uso de los PODS la recuperación de información no está en riesgo, ya que la información almacenada es independiente de la aplicación y está alojada en otro sitio.
+Gracias al uso de los PODs la recuperación de información no está en riesgo, ya que la información almacenada es independiente de la aplicación y está alojada en otro sitio.
 
 === Pruebas
 Hemos acordado realizar pruebas exhaustivas cuando la aplicación esté en funcionamiento.
