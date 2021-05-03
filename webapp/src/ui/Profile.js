@@ -129,7 +129,7 @@ const Perfil = () => {
                     webId,
                     document.getElementById("input").value
                   );
-                  toast.warning("Tu perfil ha sido modificado", {
+                  toast.info("Tu perfil ha sido modificado", {
                     position: toast.POSITION.BOTTOM_CENTER,
                     autoClose: 5000
                 })
