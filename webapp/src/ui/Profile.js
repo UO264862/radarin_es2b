@@ -75,7 +75,7 @@ const Perfil = () => {
               <span className="perfil-span">Nombre de Usuario:</span>
               <br />
               <div>
-                <input disabled style={{ border: isBorder }} className = "inputEdit" id="input" type="text" placeholder={nombre}></input>
+                <input disabled style={{ border: isBorder }} autosave className = "inputEdit" id="input" type="text" placeholder={nombre}></input>
               </div>
             </Typography>
             <hr />

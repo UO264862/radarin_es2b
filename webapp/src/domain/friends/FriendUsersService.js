@@ -192,7 +192,8 @@ class FriendsService {
   }
 
   async deleteFriend(friend, userWebId) {
-    var friendWebId = friend.nombre;
+    console.log(friend)
+    var friendWebId = friend.webId;
     friendWebId = friendWebId.replace("[", "");
     friendWebId = friendWebId.replace("]", "");
 

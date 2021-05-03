@@ -81,7 +81,7 @@ export const ListaAmigos = ({ distanciasOpcionales }) => {
   if (distanciasAmigos) {
     listItems = distanciasAmigos.map((friend) =>
       <li key={friend} className="listElement">
-        <Card nombre={friend.nombre} web={webId} distancia={friend.distancia}></Card>
+        <Card nombre={friend.nombre} friend={friend} distancia={friend.distancia}></Card>
       </li>)
   }
   return (
@@ -169,7 +169,7 @@ export const PeticionPendiente = ({ peticion, aceptar, rechazar }) => {
     </div>
   )
 }
-export const Card = ({ distancia, nombre }) => {
+export const Card = ({ distancia, nombre, friend }) => {
   const webId = useWebId();
   const FriendsService = ServicesFactory.forFriendUsers(webId);
   var user = "" + useWebId();
@@ -182,7 +182,7 @@ export const Card = ({ distancia, nombre }) => {
         <center>
           <div className="botones">
             <Button variant="contained" className="buttoncard" id="botonOpcionP"><a href={window.location.origin}>Distancia: {distancia<1000 ? Math.round(distancia)+" m": Math.round(distancia/1000)+" km"}</a></Button>
-            <Button variant="contained" className="buttoncard" id="botonOpcionD" datatype="button" onClick={() => FriendsService.deleteFriend(nombre, user)} >Delete</Button>
+            <Button variant="contained" className="buttoncard" id="botonOpcionD" datatype="button" onClick={() => FriendsService.deleteFriend(friend, user)} >Delete</Button>
           </div>
         </center>
       </div>
