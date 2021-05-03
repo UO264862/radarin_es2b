@@ -109,7 +109,7 @@ Figura 3.3. Contexto de negocio del sistema (Parte 3: Base de datos interna).
 
 RadarIn es una aplicación descentralizada. Para lograrlo la mayoría de los datos se almacenan en los POD, pero por temas de eficiencia se guardarán en la base de datos las localizaciones y las peticiones de amistad.
 
-image:technical.png["technical context diagram"]
+// image:technical.png["technical context diagram"]
 
 [plantuml, system_scope_and_context4, svg]
 ----
