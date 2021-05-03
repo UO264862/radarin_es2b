@@ -45,16 +45,18 @@ participant Interfaz_Grafica
 database Base_De_Datos
 database Pod
 database PodAmigo
+participant Interfaz_Grafica_Amigo
+actor Amigo
 Usuario -> Interfaz_Grafica: Añadir amigo
 Usuario  -> Interfaz_Grafica: Introducir nombre de usuario de tu amigo
-Interfaz_Grafica -> Base_De_Datos: Buscas el webid del amigo 
-Base_De_Datos-> Pod : Preparar solicitud con el nombre de usuario
-
-Pod -> PodAmigo: Solicitud de amistad
-Pod <- PodAmigo: Solicitud aceptada
-Pod -> Pod: Se añade al amigo
-Pod -> Interfaz_Grafica: Devuelve los amigos
-Interfaz_Grafica -> Interfaz_Grafica: Muestra los amigos
+Interfaz_Grafica -> Base_De_Datos: Buscas el webid del amigo y se crea petición de amistad (pendiente)
+Base_De_Datos-> Interfaz_Grafica_Amigo : Manda solicitud
+Amigo ->Interfaz_Grafica_Amigo : Acepta solicitud
+Interfaz_Grafica_Amigo -> PodAmigo: Agrega amigo al pod
+Base_De_Datos<- Interfaz_Grafica_Amigo : Se actualiza la petición a completada
+Base_De_Datos-> Interfaz_Grafica: Se manda petición de confirmación
+Usuario->Interfaz_Grafica: La acepta
+Interfaz_Grafica-> Pod: Se añade al amigo
 @enduml
 ----
 
