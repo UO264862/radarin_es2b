@@ -33,14 +33,17 @@ Intenta ayudar a los desarrolladores a construir aplicaciones que usan datos que
 ==== APIs
 Usaremos una API de mapas para mostrar un mapa al usuario. Usaremos https://wiki.openstreetmap.org/wiki/Main_Page[OpenStreetMap], una API de edición para extraer y guardar geoinformación en el mapa. En concreto, utilizaremos la librería https://leafletjs.com/[Leaflet] para realizar operaciones sobre el mapa.
 
+También utilizaremos una o más APIs para crear llamadas remotas entre los servicios WebApp y RestApi.
+
 ==== Migración
-Habrá que desarrollar una aplicación Web y una para móviles, por tanto intentaremos no cambiar mucho en cuanto a desarrollo según se use una plataforma u otra.
+Desarrollaremos una aplicación Web para móviles. Aunque también podrá ser utilizada en equipos de sobremesa, su principal plataforma serán los dispositivos smartphone.
 
 === Recuperación ante un imprevisto
-Gracias al uso de los PODs la recuperación de información no está en riesgo, ya que la información almacenada es independiente de la aplicación y está alojada en otro sitio.
+La información alojada en los PODs gozará de una disponibilidad y una persistencia que no dependerá de la aplicación, sino del proveedor del POD.
+En cambio, la información alojada en la propia base de datos MongoDB, dependerá directamente del entorno de despliegue, en este caso Heroku.
 
 === Pruebas
-Hemos acordado realizar pruebas exhaustivas cuando la aplicación esté en funcionamiento.
+Hemos acordado realizar pruebas exhaustivas, de aceptación y de carga cuando la aplicación esté en funcionamiento.
 
 
 
