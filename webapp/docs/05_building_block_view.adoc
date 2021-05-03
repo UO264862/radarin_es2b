@@ -49,6 +49,7 @@ Figura 5.1. Perspectiva de la construcción de los bloques (Nivel 1).
 package "RadarIn" {
    [Inicio de sesión]
    [Registro]
+   [Perfil]
    [Petición de amistad]
    [Notificaciones]
    [Listado de amigos]
@@ -68,10 +69,12 @@ En este nivel se empieza a detallar sobre todos los contenedores con los que int
     Una vez el usuario esté registrado, cada vez que use la aplicación tendrá que entrar en sesión para que sus datos se puedan guardar. |
  *Registro* |
     Antes de empezar a usar la aplicación el usuario necesitará registrarse con sus datos personales para tener acceso a guardar datos en su POD. |
+ *Perfil* |
+    La aplicación mostrará la información recogida del usuario. |
  *Petición de amistad* |
     Envía una solicitud de amistad al amigo que deseamos añadir a nuestra lista. Nuestro amigo tendrá que aceptar la solicitud para poder tener acceso a sus datos principales. |
  *Notificaciones* |
-    La aplicación enviará una notificación cada vez que un amigo nuestro esté cerca. Podremos activarlas y desactivarlas. |
+    La aplicación enviará una notificación cada vez que un amigo nuestro esté cerca. |
  *Listado de amigos* |
     Es la lista de amigos del usuario, podrá añadir más amigos o eliminarlos. |
  *Visualización del mapa* |
@@ -80,7 +83,7 @@ En este nivel se empieza a detallar sobre todos los contenedores con los que int
 
 === Nivel 3
 
-image:05_nivel3.png["Diagrama nivel 3"]
+// image:05_nivel3.png["Diagrama nivel 3"]
 
 [plantuml, building_block_view3, svg]
 ----

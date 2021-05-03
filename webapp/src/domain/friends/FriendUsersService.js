@@ -88,6 +88,14 @@ class FriendsService {
         });
       }
     }
+    else{
+      //cambiamos la entrada de la tabla peticiones
+      aceptarSolicitud(webIdSolicitante, webIdSolicitado);
+      toast.info("Has aceptado correctamente la petición", {
+        position: toast.POSITION.BOTTOM_LEFT,
+        autoClose: 5000
+      });
+    }
     this.reload();
   }
   // confirmar la peticion de amistad y añadir por parte del solicitante al solicitado
@@ -184,7 +192,8 @@ class FriendsService {
   }
 
   async deleteFriend(friend, userWebId) {
-    var friendWebId = friend.nombre;
+    console.log(friend)
+    var friendWebId = friend.webId;
     friendWebId = friendWebId.replace("[", "");
     friendWebId = friendWebId.replace("]", "");
 
@@ -291,13 +300,15 @@ class FriendsService {
   async obtenerAmigos() {
     var lista = new Array();
     if(await this.isWebIdValid(this.webid)){
-      for await (const friend of data[this.webid].friends) lista.push(friend.toString());
+      for await (const friend of data[this.webid].friends) {
+        if( await getUsernameByWebId(friend))
+          lista.push(friend.toString());
+      }
       const users = await Promise.all(lista);
       return users;
     }
     return lista;
   }
-
 }
 
 export default FriendsService;

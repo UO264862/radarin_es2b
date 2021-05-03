@@ -1,29 +1,32 @@
 //Dependences external
 import React from 'react';
-import './Friends.css';
 import ReactDOM from 'react-dom';
-import { useWebId, List, Name, Link } from "@solid/react";
+import { useWebId, Name } from "@solid/react";
 import Button from '@material-ui/core/Button';
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { calcularDistancia2 } from "./modules/Markers";
+import "react-toastify/dist/ReactToastify.css";
 
-// Dependences from: ~/ui/friends
-import './Friends.css';
+import './styles/Friends.css';
 
 // Domain dependences
 import ServicesFactory from "../domain/ServicesFactory";
 import FriendsService from '../domain/friends/FriendUsersService';
 
-let peticionesCompletadas = []
-let peticionesPendientes = []
+let peticionesCompletadas = [];
+let peticionesPendientes = [];
+let distanciasAmigos = [];
 
 export const Friends = () => {
 
   const webId = useWebId();
   const FriendsService = ServicesFactory.forFriendUsers(webId);
+  listarDistancias(webId);
   listarPeticionesPendientes(webId)
   listarPeticionesCompletadas(webId)
+  
+
   return (
     <div id="friends" title="Friends">
       <div className="prueba">
@@ -45,11 +48,8 @@ export const Friends = () => {
         </div>
         <br></br>
         <h2>Lista de amigos</h2>
-        <List src={`[${webId}].friends`} className="list" padding-inline-start="0">{(friend) =>
-          <li key={friend} className="listElement">
-            <Card nombre={`${friend}`} web={webId}></Card>
-          </li>}
-        </List>
+        <div id="amigos" className="list-pendientes" padding-inline-start="0"></div>
+
         <ToastContainer />
       </div>
     </div>
@@ -58,11 +58,35 @@ export const Friends = () => {
 
 export async function listarPeticionesCompletadas(webId) {
   peticionesCompletadas = await new FriendsService(webId).getPeticionesCompletadas(webId);
-  console.log("Completadas:"+ await peticionesCompletadas)
-    ReactDOM.render(
-      <ListaPeticionesCompletadas />,
-      document.getElementById("completadas")
-    )
+  ReactDOM.render(
+    <ListaPeticionesCompletadas />,
+    document.getElementById("completadas")
+  )
+}
+
+export async function listarDistancias(webId) {
+  distanciasAmigos = await calcularDistancia2(webId);
+  console.log(distanciasAmigos)
+  ReactDOM.render(
+    <ListaAmigos />,
+    document.getElementById("amigos")
+  )
+}
+
+export const ListaAmigos = ({ distanciasOpcionales }) => {
+  if (distanciasOpcionales)
+    distanciasAmigos = distanciasOpcionales
+  var listItems;
+  if (distanciasAmigos) {
+    listItems = distanciasAmigos.map((friend) =>
+      <li key={friend} className="listElement">
+        <Card nombre={friend.nombre} friend={friend} distancia={friend.distancia}></Card>
+      </li>)
+  }
+  return (
+    <ul className="list" padding-inline-start="0">
+      {listItems}
+    </ul>);
 }
 
 export const ListaPeticionesCompletadas = ({ peticionesOpcional }) => {
@@ -101,13 +125,11 @@ export const PeticionCompletada = ({ peticion, confirmar }) => {
 }
 
 export async function listarPeticionesPendientes(webId) {
-  console.log(webId)
   peticionesPendientes = await new FriendsService(webId).getPeticionesPendientes(webId);
-  console.log("Pendientes:"+ await peticionesPendientes)
-    ReactDOM.render(
-      <ListaPeticionesPendientes />,
-      document.getElementById("pendientes")
-    )
+  ReactDOM.render(
+    <ListaPeticionesPendientes />,
+    document.getElementById("pendientes")
+  )
 }
 
 export const ListaPeticionesPendientes = ({ peticionesOpcional }) => {
@@ -146,7 +168,7 @@ export const PeticionPendiente = ({ peticion, aceptar, rechazar }) => {
     </div>
   )
 }
-export const Card = (props) => {
+export const Card = ({ distancia, nombre, friend }) => {
   const webId = useWebId();
   const FriendsService = ServicesFactory.forFriendUsers(webId);
   var user = "" + useWebId();
@@ -154,12 +176,12 @@ export const Card = (props) => {
     <div className="card" >
       <div>
         <h4 className="amigos">
-          <Name src={props.nombre}>{props.nombre}</Name>
+          <Name src={nombre}>{nombre}</Name>
         </h4>
         <center>
           <div className="botones">
-            <Button variant="contained" className="buttoncard" id="botonOpcionP"><Link href={props.nombre} className="link" datatype="link">Profile</Link></Button>
-            <Button variant="contained" className="buttoncard" id="botonOpcionD" datatype="button" onClick={() => FriendsService.deleteFriend(props, user)} >Delete</Button>
+            <Button variant="contained" className="buttoncard" id="botonOpcionP"><a href={window.location.origin}>Distancia: {distancia<1000 ? Math.round(distancia)+" m": Math.round(distancia/1000)+" km"}</a></Button>
+            <Button variant="contained" className="buttoncard" id="botonOpcionD" datatype="button" onClick={() => FriendsService.deleteFriend(friend, user)} >Delete</Button>
           </div>
         </center>
       </div>

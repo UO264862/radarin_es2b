@@ -1,6 +1,6 @@
-import CurrentUserService from "./CurrentUserService";
+import CurrentUserService from "../domain/currentUser/CurrentUserService";
 import "@testing-library/jest-dom/extend-expect";
-import { UserDTO } from "../UserDTO";
+import { UserDTO } from "../domain/UserDTO";
 
 test ("comprobar que el currentUserService funciona correctamente", async () => {
   var currentUserService = new CurrentUserService()

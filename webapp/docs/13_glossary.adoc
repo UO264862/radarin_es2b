@@ -1,0 +1,51 @@
+[[section-glossary]]
+== Glosario
+
+[options = "header", cols = "1,2"]
+|===
+ Término | Definición |
+ *Amigo* |
+	Usuario que agregas en la aplicación con el cual os habéis dado permisos mutuamente. |
+ *API* |
+	Conjunto de subrutinas, funciones y procedimientos (o métodos, en la programación orientada a objetos) que ofrece cierta biblioteca para ser utilizado por otro software como una capa de abstracción. |
+ *Aplicación* |
+	Aplicación web donde los datos y los archivos son procesados. |
+ *Aplicación móvil* |
+	Medio por el cual podremos interactuar con la aplicación web. | 
+ *Arc42* |
+	Plantilla para la comunicación y documentación de arquitectura que responde a qué debemos documentar y a cómo debemos documentar. |
+ *AsciiDoctor* |
+	Es un procesador de texto y una cadena de herramientas de publicación para convertir el marcado AsciiDoc en HTML 5, DocBook 4.5 y otros formatos. |
+ *Cliente* |
+	Empresa, persona o conjunto de personas que han pedido que se realize este proyecto. |
+ *Docker* |
+	Crear contenedores ligeros y portables para las aplicaciones sofware que puedan ejecutarse en cualquier máquina. |
+ *GitHub* |
+	Es un sistema de gestión de proyectos y control de versiones de código, así como una plataforma de red social diseñada para desarrolladores. |
+ *Heroku* |
+	Plataforma online de despliegue de aplicaciones en la nube.|
+ *HTTPS* |
+	Es un protocolo de aplicación basado en el protocolo HTTP, destinado a la transferencia segura de datos de hipertexto. |
+ *JavaScript* |
+	Es un lenguaje de programación o de secuencias de comandos que te permite implementar funciones complejas en páginas web, cada vez que una página web hace algo más que sentarse allí y mostrar información estática para que la veas, muestra oportunas actualizaciones de contenido, mapas interactivos, animación de Gráficos 2D/3D, desplazamiento de máquinas reproductoras de vídeo, etc. |
+ *Localización* |
+	Ubicación de un usuario registrado. |
+ *Patrón de diseño por capas* |
+	Es un patrón de diseño de aplicaciones que divide la aplicación en una serie de capas consecutivas. |
+ *OpenStreetMap* |
+	Es un mapa del mundo creado por una multitud de personas, que se ha convertido en una de las fuentes más detalladas de datos de mapas. |
+ *POD* |
+	Almacenamiento descentralizado qhue se usa en aplicaciones Solid que permite al usuario conservar el control y la propiedad de sus datos. |
+ *RadarIn* |
+	Conjunto de aplicación y aplicacion móvil|
+ *React* |
+	Framework de JavaScript que nos da la posibilidad de crear interfaces de usuario de una manera fácil e intuitiva. |
+ *SoLiD* |
+	Es un proyecto que se basa en descentralizar los datos de la aplicación usando los PODs. |
+ *_Stakeholder_* |
+	Persona que se haya involucrado en el uso o desarrollo de la aplicación.|
+ *Usuario* |
+	Persona que interactua con la aplicación sin estar registrado necesariamente.|
+ *Usuario registrado* |
+	Usuario que se ha registrado y ,por lo tanto, ha concedido los permisos pertinentes a la aplicación.|
+|===
