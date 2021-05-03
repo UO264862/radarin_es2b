@@ -1,4 +1,4 @@
-import GetUsernameByWebId from "../src/domain/currentUser/strategies/GetUsernameByWebId";
+import GetUsernameByWebId from "../domain/currentUser/strategies/GetUsernameByWebId";
 
 test("Comprobar que funciona correctamente", async () => {
     var gubw=new GetUsernameByWebId("webid");

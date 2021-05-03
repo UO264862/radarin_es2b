@@ -2,7 +2,7 @@
 import { UserDTO } from '../UserDTO';
 import CurrentUserFactory from './CurrentUserFactory';
 import FriendsService from "../friends/FriendUsersService";
-import { getUsernameByWebId, getUsuarioByWebId } from '../../api/api';
+import { getUsuarioByWebId } from '../../api/api';
 
 class CurrentUserService {
 

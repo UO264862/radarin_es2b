@@ -1,5 +1,5 @@
 import React from "react";
-import { calcularDistancia, getMarkers, iconByColourCode, getMarker } from "./Markers";
+import { calcularDistancia, getMarkers, iconByColourCode, getMarker } from "../ui/modules/Markers";
 import "@testing-library/jest-dom/extend-expect";
 import { divIcon  } from 'leaflet';
 import { UserDTO } from "../domain/UserDTO";

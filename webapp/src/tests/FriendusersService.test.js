@@ -1,4 +1,4 @@
-import FriendUsersService from "./FriendUsersService";
+import FriendUsersService from "../domain/friends/FriendUsersService";
 import "@testing-library/jest-dom/extend-expect";
 
 test ("comprobar que el friendUsersService funciona correctamente", async () => {
