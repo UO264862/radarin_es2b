@@ -1,0 +1,6 @@
+[[section-tests]]
+== Pruebas
+
+A lo largo del desarrollo hay que testear nuestra aplicación para encontrar posibles fallos. Para ello hemos realizado distintos tipos de pruebas: 
+* Pruebas de aceptación: son pruebas que pueden ejecutarse con el cliente. Si pasan, el producto es aceptado. Hemos realizado numerosas pruebas de este tipo, llegando así a una cobertura de código del 52%.
+* Pruebas de carga: son pruebas que permiten probar con cargas de usuarios concurrentes. Se pueden llevar a cabo con scripts propios o con herramientas de terceros, opción por la que hemos optado, haciendo uso de la herramienta Gatling, escrita en scala.

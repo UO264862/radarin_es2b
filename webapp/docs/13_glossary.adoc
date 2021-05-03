@@ -9,7 +9,7 @@
  API |
     Conjunto de subrutinas, funciones y procedimientos (o métodos, en la programación orientada a objetos) 
     que ofrece cierta biblioteca para ser utilizado por otro software como una capa de abstracción. |
- Aplicación |
+ Aplicación|
 	Aplicación web donde los datos y los archivos son procesados.|
  Aplicación móvil |
 	Medio por el cual podremos interactuar con la aplicación web. | 
@@ -18,7 +18,7 @@
  AsciiDoctor |
     Es un procesador de texto y una cadena de herramientas de publicación para convertir el marcado AsciiDoc en HTML 5, DocBook 4.5 y otros formatos. |
  Cliente |
-	Empresa, persona o conjunto de personas que han pedido que se realize este proyecto |
+	Empresa, persona o conjunto de personas que han pedido que se realize este proyecto
  Docker |
     Crear contenedores ligeros y portables para las aplicaciones sofware que puedan ejecutarse en cualquier máquina. |
  GitHub |
