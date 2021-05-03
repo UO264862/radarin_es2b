@@ -42,14 +42,12 @@ Figura 6.1. Perspectiva en tiempo de ejecución. (Inicio de sesión)
 @startuml
 actor Usuario
 participant Interfaz_Grafica
-participant Pop_Up_AddFriends
 database Base_De_Datos
 database Pod
 database PodAmigo
 Usuario -> Interfaz_Grafica: Añadir amigo
-Interfaz_Grafica -> Pop_Up_AddFriends: Abrir PopUp
-Usuario -> Pop_Up_AddFriends: Introducir nombre de usuario de tu amigo
-Pop_Up_AddFriends -> Base_De_Datos: Buscas el webid del amigo 
+Usuario  -> Interfaz_Grafica: Introducir nombre de usuario de tu amigo
+Interfaz_Grafica -> Base_De_Datos: Buscas el webid del amigo 
 Base_De_Datos-> Pod : Preparar solicitud con el nombre de usuario
 
 Pod -> PodAmigo: Solicitud de amistad
@@ -70,18 +68,18 @@ Figura 6.2. Perspectiva en tiempo de ejecución. (Añadir un amigo)
 
 [plantuml, runtime_view3, svg]
 ----
+@startuml
 actor Usuario
 participant Interfaz_Grafica
-participant Pop_Up_DeleteFriend
 database Pod
 Usuario -> Interfaz_Grafica: Eliminar amigo
-Interfaz_Grafica -> Pop_Up_DeleteFriend: Abrir PopUp
-Usuario -> Pop_Up_DeleteFriend: Introducir nombre de usuario de tu amigo
+Usuario -> Interfaz_Grafica: Introducir nombre de usuario de tu amigo
 
-Pop_Up_DeleteFriend -> Pod: Solicitud de eliminar amigo
+Interfaz_Grafica -> Pod: Solicitud de eliminar amigo
 Pod->Pod: Eliminar amigo
 Pod-> Interfaz_Grafica: Devuelve los amigos
 Interfaz_Grafica -> Interfaz_Grafica: Muestra los amigos
+@enduml
 ----
 
 [.text-right]
@@ -94,6 +92,7 @@ Figura 6.3. Perspectiva en tiempo de ejecución. (Eliminar un amigo)
 
 [plantuml, runtime_view4, svg]
 ----
+@startuml
 actor Usuario
 participant Interfaz_Grafica
 database Pod
@@ -101,6 +100,7 @@ Usuario -> Interfaz_Grafica: Ver amigos
 Interfaz_Grafica -> Pod: Solicitud mostrar amigos
 Pod -> Interfaz_Grafica: Devuelve los amigos
 Interfaz_Grafica -> Interfaz_Grafica: Muestra los amigos
+@enduml
 ----
 
 [.text-right]
@@ -140,16 +140,101 @@ Figura 6.5. Perspectiva en tiempo de ejecución. (Ver amigos en el mapa)
 
 [plantuml, runtime_view6, svg]
 ----
+@startuml
 actor Usuario
-participant Aplicacion
+participant Interfaz_Grafica
 database Pod
 database PodAmigo
-Usuario -> Aplicacion:Activa localizacion
-Aplicacion -> Pod: Solicita ubicaciones amigos cercanos
+Usuario -> Interfaz_Grafica:Activa localizacion
+Interfaz_Grafica-> Pod: Solicita ubicaciones amigos cercanos
 Pod->PodAmigo:Solicita ubicación
 Pod<-PodAmigo:Devuelve ubicación
-Pod -> Aplicacion: Devuelve ubicaciones cercanas
-Aplicacion -> Usuario: Notificacion, amigo cerca
+Pod -> Interfaz_Grafica: Devuelve ubicaciones cercanas
+Interfaz_Grafica-> Interfaz_Grafica: Notificacion, amigo cerca
+@enduml
+----
+
+=== Ver Perfil
+
+. El usuario accede al perfil y ve su información.
+
+[plantuml, {plantUMLDir}verperfil, svg]
+----
+@startuml
+actor Usuario
+participant Interfaz_Grafica
+database Pod
+database Base_de_Datos
+Usuario -> Interfaz_Grafica: Accede al perfil
+Interfaz_Grafica-> Pod:Solicita los datos personales
+Interfaz_Grafica-> Base_de_Datos:Solicita el nombre de usuario
+Interfaz_Grafica<- Pod: Devuelve los datos solicitados
+Interfaz_Grafica<- Base_de_Datos:Devuelve el nombre de usuario
+@enduml
+----
+
+=== Modificar Perfil
+
+. Si lo desea puede cambiar sus datos personales.
+
+[plantuml, {plantUMLDir}modificarperfil, svg]
+----
+@startuml
+actor Usuario
+participant Interfaz_Grafica
+database Pod
+database Base_De_Datos
+Usuario -> Interfaz_Grafica: Accede al perfil
+Usuario -> Interfaz_Grafica: Introduce el nuevo nombre de usuario
+Interfaz_Grafica-> Base_De_Datos:Comprueba que no existe el nombre y si es así lo cambia
+Interfaz_Grafica<- Base_De_Datos:Devuelve el nuevo nombre en caso de éxito
+Interfaz_Grafica<- Base_De_Datos:Si ya existe le notifica al usuario
+Interfaz_Grafica-> Pod:Introduce los nuevos datos personales
+Interfaz_Grafica<- Pod: Devuelve los nuevos datos personales
+@enduml
+----
+
+=== Administrar
+
+. El administrador puede acceder a una zona donde gestionar .
+. Necesita una contraseña para entrar.
+. Una vez dentro podrá bloquear y desbloquear a los usuarios.
+
+[plantuml, {plantUMLDir}admnistrar, svg]
+----
+@startuml
+actor Usuario
+participant Interfaz_Grafica
+database Base_De_Datos
+Usuario -> Interfaz_Grafica:Accede al registro de admin
+Usuario -> Interfaz_Grafica:Introduce la contraseña y accede si es correcta
+Interfaz_Grafica-> Base_De_Datos: Gestiona a los usuarios, bloqueandolos y desbloqueandolos
+@enduml
+
+----
+
+=== Usuario Bloqueado
+
+. Un usuario bloqueado no puede acceder a la aplicación
+
+[plantuml, {plantUMLDir}usuariobloqueado, svg]
+----
+@startuml
+actor Usuario
+participant Interfaz_Grafica
+participant Pop_Up_Login
+database Pod
+database Base_De_Datos
+Usuario -> Interfaz_Grafica: Login
+Interfaz_Grafica -> Pop_Up_Login: Abrir PopUp
+Usuario -> Pop_Up_Login: Introducir datos para iniciar sesión
+Pop_Up_Login -> Pod: Solicitud inicio de sesión
+Pod -> Interfaz_Grafica: Inicio de sesion correcto
+
+Interfaz_Grafica-> Base_De_Datos: Comprueba si el usuario esta bloqueado o no
+Interfaz_Grafica<- Base_De_Datos: Si esta bloqueado, le notifica y le desconecta
+Interfaz_Grafica<- Interfaz_Grafica: Hace logout y le redirige a login
+@enduml
 ----
 
 [.text-right]

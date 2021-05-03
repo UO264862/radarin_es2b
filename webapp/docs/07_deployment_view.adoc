@@ -8,7 +8,9 @@ Concretamente, serán Microsoft Edge y Google Chrome los dos navegadores de refe
 
 .Tecnologías
 Los datos del usuario serán almacenados en un https://solidproject.org/users/get-a-pod[POD], siguiendo así las especificaciones del proyecto https://solidproject.org/[SoLiD].
-Toda característica de la aplicación dependerá de su homóloga en la plataforma https://www.heroku.com/[Heroku], donde hemos decidido que sea desplegada.
+Toda característica de la aplicación dependerá de su homóloga en la plataforma https://www.heroku.com/[Heroku], donde hemos decidido que sea desplegada. El entorno de desarrollo
+con el cual hemos trabajado es https://nodejs.org/es/[Node.js]. Además nos hemos apoyado en una base de datos de https://www.mongodb.com/2[MongoDB] para guardar cierta información 
+y así mejorar la velocidad y poder realizar una serie de operaciones con esos datos.
 
 === Infraestructura
 
