@@ -1,15 +1,14 @@
 //Dependences external
 import React from 'react';
-import './Friends.css';
 import ReactDOM from 'react-dom';
 import { useWebId, List, Name, Link } from "@solid/react";
 import Button from '@material-ui/core/Button';
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import { ToastContainer } from 'react-toastify';
+import { calcularDistancia2 } from "./modules/Markers";
 import 'react-toastify/dist/ReactToastify.css';
 
-// Dependences from: ~/ui/friends
-import './Friends.css';
+import './styles/Friends.css';
 
 // Domain dependences
 import ServicesFactory from "../domain/ServicesFactory";
@@ -17,13 +16,16 @@ import FriendsService from '../domain/friends/FriendUsersService';
 
 let peticionesCompletadas = []
 let peticionesPendientes = []
+let distanciasAmigos;
 
-export const Friends = () => {
+export const Friends = ()  => {
 
   const webId = useWebId();
   const FriendsService = ServicesFactory.forFriendUsers(webId);
   listarPeticionesPendientes(webId)
   listarPeticionesCompletadas(webId)
+  listarDistancias(webId);
+
   return (
     <div id="friends" title="Friends">
       <div className="prueba">
@@ -47,7 +49,7 @@ export const Friends = () => {
         <h2>Lista de amigos</h2>
         <List src={`[${webId}].friends`} className="list" padding-inline-start="0">{(friend) =>
           <li key={friend} className="listElement">
-            <Card nombre={`${friend}`} web={webId}></Card>
+            <Card nombre={`${friend}`} web={webId} distanciasAmigos={distanciasAmigos}></Card>
           </li>}
         </List>
         <ToastContainer />
@@ -58,11 +60,14 @@ export const Friends = () => {
 
 export async function listarPeticionesCompletadas(webId) {
   peticionesCompletadas = await new FriendsService(webId).getPeticionesCompletadas(webId);
-  console.log("Completadas:"+ await peticionesCompletadas)
     ReactDOM.render(
       <ListaPeticionesCompletadas />,
       document.getElementById("completadas")
     )
+}
+
+export async function listarDistancias(webId) {
+  distanciasAmigos = await calcularDistancia2(webId);
 }
 
 export const ListaPeticionesCompletadas = ({ peticionesOpcional }) => {
@@ -103,7 +108,6 @@ export const PeticionCompletada = ({ peticion, confirmar }) => {
 export async function listarPeticionesPendientes(webId) {
   console.log(webId)
   peticionesPendientes = await new FriendsService(webId).getPeticionesPendientes(webId);
-  console.log("Pendientes:"+ await peticionesPendientes)
     ReactDOM.render(
       <ListaPeticionesPendientes />,
       document.getElementById("pendientes")
@@ -146,7 +150,7 @@ export const PeticionPendiente = ({ peticion, aceptar, rechazar }) => {
     </div>
   )
 }
-export const Card = (props) => {
+export const Card = ({distanciasAmigos,nombre}) => {
   const webId = useWebId();
   const FriendsService = ServicesFactory.forFriendUsers(webId);
   var user = "" + useWebId();
@@ -154,12 +158,12 @@ export const Card = (props) => {
     <div className="card" >
       <div>
         <h4 className="amigos">
-          <Name src={props.nombre}>{props.nombre}</Name>
+          <Name src={nombre}>{nombre}</Name>
         </h4>
         <center>
           <div className="botones">
-            <Button variant="contained" className="buttoncard" id="botonOpcionP"><Link href={props.nombre} className="link" datatype="link">Profile</Link></Button>
-            <Button variant="contained" className="buttoncard" id="botonOpcionD" datatype="button" onClick={() => FriendsService.deleteFriend(props, user)} >Delete</Button>
+            <Button variant="contained" className="buttoncard" id="botonOpcionP"><Link to="/mapa">{distanciasAmigos[nombre]}</Link></Button>
+            <Button variant="contained" className="buttoncard" id="botonOpcionD" datatype="button" onClick={() => FriendsService.deleteFriend(nombre, user)} >Delete</Button>
           </div>
         </center>
       </div>

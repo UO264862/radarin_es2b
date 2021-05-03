@@ -1,5 +1,5 @@
 // Persistence dependences
-import PersistenceFactory from '../../../persistence/PersistenceFactory';
+import { modificarCoordenadas, getUsernameByWebId } from "../../../api/api";
 
 class UpdateCurrentUserCoordinates {
 
@@ -11,7 +11,7 @@ class UpdateCurrentUserCoordinates {
     execute() {
         if (!this.isWebIdInvalid() || !(this.isUsernamePresent()))
             return false;
-        return PersistenceFactory.forUser().updateCoords(this.webId, this.coordinates);
+        return modificarCoordenadas(this.webId, this.coordinates);
     }
 
     isWebIdInvalid() {
@@ -19,7 +19,7 @@ class UpdateCurrentUserCoordinates {
     }
 
     isUsernamePresent() {
-        let username = PersistenceFactory.forUser().getUsername(this.webId);
+        let username = getUsernameByWebId(this.webId);
         return (username != null);
     }
 }

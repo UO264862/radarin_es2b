@@ -6,8 +6,8 @@ import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 
 // Dependences from: ~/ui/map
-import './map.css';
-import { getMarkers, calcularDistancia } from './Markers';
+import './styles/map.css';
+import { getMarkers, calcularDistancia } from './modules/Markers';
 
 
 // Import dependences

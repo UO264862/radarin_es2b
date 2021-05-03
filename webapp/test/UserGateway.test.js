@@ -1,4 +1,4 @@
-import UserGateway from "./UserGateway";
+import UserGateway from "../src/persistence/user/UserGateway";
 
 test('Comprobar que la factoria funciona correctamente', async () => {
    var userGateway=new UserGateway();
